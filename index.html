@@ -6,8 +6,8 @@
 <title>French Learning Studio — Le Nouveau Taxi ! 1 (Leçons 7–12)</title>
 <style>
 :root{
-  --bg:#f2f7fd; --card:#ffffff; --ink:#1b2a3a; --muted:#5c7characters;
-  --muted:#5c738c; --blue:#3f7fd4; --blue-l:#e4efff; --blue-d:#1f4e8c;
+  --bg:#f2f7fd; --card:#ffffff; --ink:#1b2a3a; --muted:#5c738c;
+  --blue:#3f7fd4; --blue-l:#e4efff; --blue-d:#1f4e8c;
   --ok:#17724a; --ok-bg:#e5f6ed; --bad:#b3261e; --bad-bg:#fdeceb;
   --warn:#8a5a00; --warn-bg:#fff5e0;
   --line:#d8e4f2; --radius:16px;
@@ -31,7 +31,6 @@ a{color:var(--blue-d)}
 button{font-family:inherit;font-size:1rem}
 :focus-visible{outline:3px solid #f2a33c; outline-offset:2px; border-radius:6px}
 
-/* ---------- HEADER ---------- */
 header.appbar{
   position:sticky;top:0;z-index:50;
   background:linear-gradient(135deg,#3f7fd4,#6ea8e8);
@@ -50,7 +49,6 @@ header.appbar .sub{font-size:.75rem;opacity:.92;display:block;font-weight:400}
 .iconbtn:hover{background:rgba(255,255,255,.3)}
 #menuBtn{display:none}
 
-/* ---------- LAYOUT ---------- */
 .layout{display:flex;min-height:calc(100vh - 58px)}
 nav.sidebar{
   width:250px;flex:0 0 250px;background:var(--card);border-right:1px solid var(--line);
@@ -67,7 +65,6 @@ nav.sidebar h2{font-size:.72rem;text-transform:uppercase;letter-spacing:.09em;co
 .navbtn .em{font-size:1.05rem}
 main#main{flex:1;padding:1.2rem;max-width:1200px;margin:0 auto;width:100%;min-width:0}
 
-/* ---------- CARDS ---------- */
 .card{
   background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
   padding:1.1rem 1.2rem;box-shadow:var(--shadow);margin-bottom:1rem;
@@ -102,14 +99,12 @@ main#main{flex:1;padding:1.2rem;max-width:1200px;margin:0 auto;width:100%;min-wi
 .muted{color:var(--muted)}
 small.muted{font-size:.82rem}
 
-/* ---------- TABLES ---------- */
 table{width:100%;border-collapse:collapse;font-size:.92rem}
 th,td{padding:.5rem .55rem;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
 th{background:var(--blue-l);color:var(--blue-d);font-size:.82rem;text-transform:uppercase;letter-spacing:.04em}
 tr:hover td{background:rgba(63,127,212,.05)}
 .fr{font-weight:600;color:var(--blue-d)}
 
-/* ---------- QUIZ ---------- */
 .opt{
   display:block;width:100%;text-align:left;background:var(--card);
   border:2px solid var(--line);border-radius:12px;padding:.7rem .9rem;margin:.45rem 0;
@@ -131,7 +126,6 @@ input[type=text],textarea,select{
 textarea{min-height:130px;resize:vertical}
 input[type=text]:focus,textarea:focus,select:focus{border-color:var(--blue)}
 
-/* ---------- CHIPS (sentence ordering) ---------- */
 .chips{display:flex;flex-wrap:wrap;gap:.4rem;margin:.5rem 0}
 .chip{
   background:var(--blue-l);border:1px solid var(--line);border-radius:10px;
@@ -161,7 +155,46 @@ input[type=text]:focus,textarea:focus,select:focus{border-color:var(--blue)}
 .face .big{font-size:1.6rem;font-weight:800;color:var(--blue-d)}
 .face .vi{font-size:1.2rem;font-weight:700}
 
-/* ---------- WORD SEARCH ---------- */
+/* Flashcard modes */
+.fc-modes{display:flex;flex-wrap:wrap;gap:.4rem;margin:.5rem 0}
+.fc-mode{
+  background:var(--card);border:2px solid var(--line);border-radius:12px;
+  padding:.5rem .8rem;cursor:pointer;font-size:.88rem;font-weight:600;color:var(--ink);
+  display:flex;align-items:center;gap:.4rem;transition:.15s;
+}
+.fc-mode:hover{border-color:var(--blue);background:var(--blue-l)}
+.fc-mode.active{background:var(--blue);color:#fff;border-color:var(--blue)}
+.fc-mode small{font-weight:400;opacity:.8;font-size:.72rem;display:block;text-align:left}
+
+.fc-stats{display:flex;flex-wrap:wrap;gap:.6rem;margin:.7rem 0}
+.fc-stat{
+  background:var(--blue-l);border-radius:10px;padding:.35rem .7rem;font-size:.82rem;
+  border:1px solid var(--line);
+}
+.fc-stat strong{color:var(--blue-d);font-size:1rem}
+
+/* Matching grid */
+.match-grid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin-top:.7rem}
+.match-col{display:flex;flex-direction:column;gap:.4rem}
+.match-card{
+  background:var(--card);border:2px solid var(--line);border-radius:12px;
+  padding:.65rem .8rem;cursor:pointer;text-align:left;font-size:.92rem;transition:.15s;
+}
+.match-card:hover{border-color:var(--blue);background:var(--blue-l)}
+.match-card.sel{border-color:var(--blue);background:var(--blue-l);font-weight:700}
+.match-card.done{border-color:var(--ok);background:var(--ok-bg);color:var(--ok);cursor:default;opacity:.7}
+.match-card.err{border-color:var(--bad);background:var(--bad-bg);animation:shake .35s}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+
+/* Speed round */
+.speed-timer{
+  font-size:2rem;font-weight:800;text-align:center;color:var(--blue-d);
+  font-variant-numeric:tabular-nums;margin:.3rem 0;
+}
+.speed-timer.warn{color:#c07a1a}
+.speed-timer.danger{color:var(--bad);animation:pulse .8s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.55}}
+
 .wsgrid{display:grid;gap:2px;justify-content:center;margin:.7rem auto;user-select:none}
 .wscell{
   width:26px;height:26px;display:flex;align-items:center;justify-content:center;
@@ -170,7 +203,6 @@ input[type=text]:focus,textarea:focus,select:focus{border-color:var(--blue)}
 .wscell.sel{background:#f2a33c;color:#fff}
 .wscell.found{background:var(--ok);color:#fff}
 
-/* ---------- MISC ---------- */
 .toast{
   position:fixed;bottom:1.2rem;left:50%;transform:translateX(-50%);
   background:#1b2a3a;color:#fff;padding:.6rem 1rem;border-radius:12px;z-index:99;
@@ -193,6 +225,7 @@ ul.tight li{margin:.18rem 0}
   nav.sidebar.open{transform:translateX(0)}
   main#main{padding:.85rem}
   .wscell{width:22px;height:22px;font-size:.72rem}
+  .match-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -236,9 +269,6 @@ ul.tight li{margin:.18rem 0}
 <script>
 /* =========================================================================
    FRENCH LEARNING STUDIO — Le Nouveau Taxi ! 1, Leçons 7–12
-   Toàn bộ nội dung bài tập là nội dung LUYỆN TẬP GỐC do ứng dụng tạo ra,
-   lấy cảm hứng từ chủ đề/ngữ pháp của giáo trình. Không phải bản sao
-   nguyên văn của sách giáo khoa.
    ========================================================================= */
 
 /* ------------------------- 1. HELPERS ------------------------- */
@@ -281,7 +311,6 @@ const LESSONS = [
 ];
 
 /* ------------------------- 3. VOCABULARY ------------------------- */
-/* w = français, v = tiếng Việt, ipa, p = loại từ, e = exemple, ev = dịch ví dụ */
 const VOCAB = {
 7:[
 {w:"un pantalon",v:"quần dài",ipa:"[pɑ̃talɔ̃]",p:"n.m.",e:"Ce pantalon est trop grand.",ev:"Cái quần này quá rộng."},
@@ -479,9 +508,6 @@ const VOCAB = {
 ]
 };
 
-/* Bảng tra cứu nhanh */
-const VOCAB_BY_LESSON = {};
-Object.keys(VOCAB).forEach(k=>{VOCAB_BY_LESSON[k]=VOCAB[k];});
 const ALL_VOCAB = [];
 Object.keys(VOCAB).forEach(k=>VOCAB[k].forEach((it,i)=>ALL_VOCAB.push(Object.assign({},it,{lesson:Number(k),idx:i}))));
 
@@ -489,13 +515,11 @@ Object.keys(VOCAB).forEach(k=>VOCAB[k].forEach((it,i)=>ALL_VOCAB.push(Object.ass
 const GRAMMAR_NOTES = {
 7:[
  {t:"Adjectifs démonstratifs — Tính từ chỉ định",
-  pts:[
-   "Tính từ chỉ định dùng để CHỈ một người/vật cụ thể: « cái này », « cái kia ».",
+  pts:["Tính từ chỉ định dùng để CHỈ một người/vật cụ thể: « cái này », « cái kia ».",
    "ce + danh từ giống đực số ít bắt đầu bằng PHỤ ÂM: ce pantalon, ce pull.",
-   "cet + danh từ giống đực số ít bắt đầu bằng NGUYÊN ÂM hoặc h câm: cet objet, cet hôtel, cet homme.",
+   "cet + danh từ giống đực số ít bắt đầu bằng NGUYÊN ÂM hoặc h câm: cet objet, cet hôtel.",
    "cette + danh từ giống cái số ít: cette robe, cette chemise.",
-   "ces + danh từ số nhiều (cả đực lẫn cái): ces chaussures, ces manteaux."
-  ],
+   "ces + danh từ số nhiều (cả đực lẫn cái): ces chaussures, ces manteaux."],
   ex:[{f:"Ce pantalon est trop grand.",v:"Cái quần này quá rộng."},
       {f:"Cet hôtel est au centre-ville.",v:"Khách sạn này ở trung tâm thành phố."},
       {f:"Cette robe est jolie.",v:"Chiếc váy này đẹp."},
@@ -509,7 +533,7 @@ const GRAMMAR_NOTES = {
       {f:"Quels vêtements sont en solde ?",v:"Những bộ quần áo nào đang giảm giá?"},
       {f:"Quelles chaussures sont à toi ?",v:"Đôi giày nào là của bạn?"}]},
  {t:"Các mẫu câu hỏi thường dùng khi mua sắm",
-  pts:["Comment tu trouves ce pantalon ? → hỏi ý kiến (bạn thấy … thế nào?).",
+  pts:["Comment tu trouves ce pantalon ? → hỏi ý kiến.",
        "Elle est comment, cette robe ? → hỏi đặc điểm.",
        "Combien coûte cette chemise ? / Ça fait combien ? → hỏi giá.",
        "Quelle taille ? / Quelle taille faites-vous ? → hỏi cỡ."],
@@ -518,16 +542,16 @@ const GRAMMAR_NOTES = {
  {t:"Négation — Phủ định với ne … pas",
   pts:["Cấu trúc: SUJET + ne + ĐỘNG TỪ + pas + (bổ ngữ).",
        "ne → n' trước nguyên âm hoặc h câm: je n'aime pas, il n'y a pas.",
-       "Trong văn nói, người Pháp thường bỏ « ne »: Je aime pas (không chuẩn khi viết).",
+       "Trong văn nói, người Pháp thường bỏ « ne »: J'aime pas (không chuẩn khi viết).",
        "Sau phủ định, un/une/des thường đổi thành de: Je n'ai pas de robe blanche."],
   ex:[{f:"Je n'aime pas cette couleur.",v:"Tôi không thích màu này."},
       {f:"Elle ne prend pas ce jean.",v:"Cô ấy không lấy chiếc quần bò này."},
       {f:"Ce n'est pas cher.",v:"Cái này không đắt."}]},
  {t:"Les nombres 70 – 1000",
-  pts:["70 = soixante-dix ; 71 = soixante et onze (có « et ») ; 72 = soixante-douze … 79 = soixante-dix-neuf.",
-       "80 = quatre-vingts (có -s khi không theo sau bởi số khác) ; 81 = quatre-vingt-un (mất -s).",
+  pts:["70 = soixante-dix ; 71 = soixante et onze (có « et ») ; 72 = soixante-douze …",
+       "80 = quatre-vingts (có -s khi không theo sau bởi số khác) ; 81 = quatre-vingt-un.",
        "90 = quatre-vingt-dix ; 91 = quatre-vingt-onze.",
-       "100 = cent ; 200 = deux cents (có -s khi là số cuối) ; 201 = deux cent un (mất -s).",
+       "100 = cent ; 200 = deux cents ; 201 = deux cent un.",
        "1000 = mille (không bao giờ có -s)."],
   ex:[{f:"78 = soixante-dix-huit",v:"78"},
       {f:"80 = quatre-vingts / 200 = deux cents / 1000 = mille",v:"80 / 200 / 1000"}]}
@@ -537,7 +561,7 @@ const GRAMMAR_NOTES = {
   pts:["à gauche de / à droite de = bên trái / bên phải của.",
        "au centre de = ở giữa ; entre … et … = giữa … và …",
        "à côté de = bên cạnh ; devant = phía trước ; derrière = phía sau.",
-       "sur = ở trên (tiếp xúc) ; sous = ở dưới ; contre = dựa vào, áp vào.",
+       "sur = ở trên ; sous = ở dưới ; contre = dựa vào.",
        "à + le = au ; à + les = aux ; de + le = du ; de + les = des."],
   ex:[{f:"Le tableau est à gauche de la porte.",v:"Bức tranh ở bên trái cửa."},
       {f:"La sculpture est au centre de la salle.",v:"Tác phẩm điêu khắc ở giữa phòng."},
@@ -554,7 +578,7 @@ const GRAMMAR_NOTES = {
 ],
 9:[
  {t:"Pronoms toniques (số nhiều)",
-  pts:["nous (chúng tôi), vous (các bạn), eux (họ – nam hoặc hỗn hợp), elles (họ – toàn nữ).",
+  pts:["nous (chúng tôi), vous (các bạn), eux (họ – nam/hỗn hợp), elles (họ – toàn nữ).",
        "chez nous = ở nhà chúng tôi ; chez vous = ở nhà các bạn.",
        "chez eux = ở nhà họ (nam/hỗn hợp) ; chez elles = ở nhà họ (nữ).",
        "Dùng để nhấn mạnh: Eux, ils louent un grand appartement."],
@@ -567,9 +591,9 @@ const GRAMMAR_NOTES = {
   ex:[{f:"L'appartement est en face de la gare.",v:"Căn hộ ở đối diện nhà ga."},
       {f:"C'est un appartement avec balcon pour deux personnes.",v:"Đó là một căn hộ có ban công cho hai người."}]},
  {t:"Questions avec Où",
-  pts:["Où est … ? = … ở đâu? (hỏi vị trí)",
+  pts:["Où est … ? = … ở đâu?",
        "C'est où ? = Nó ở đâu? (khẩu ngữ)",
-       "Ça se trouve où ? = Nó nằm ở đâu? (lịch sự hơn)",
+       "Ça se trouve où ? = Nó nằm ở đâu?",
        "Chú ý: Où sont les toilettes ? (số nhiều → sont)."],
   ex:[{f:"Où est la cuisine ? — Elle est à côté du salon.",v:"Nhà bếp ở đâu? — Nó ở cạnh phòng khách."},
       {f:"Ça se trouve où ? — Au 2e étage.",v:"Nó ở đâu? — Ở tầng 2."}]}
@@ -577,7 +601,7 @@ const GRAMMAR_NOTES = {
 10:[
  {t:"Impératif — Thức mệnh lệnh (tu / vous)",
   pts:["Với « tu »: chia như hiện tại nhưng BỎ -s ở động từ nhóm 1: tu tournes → Tourne ! ; aller → Va !",
-       "Với « nous »: Allons ! (dùng khi rủ rê).",
+       "Với « nous »: Allons ! (rủ rê).",
        "Với « vous »: giữ nguyên dạng hiện tại: Tournez ! Allez ! Prenez !",
        "Dùng để chỉ đường, ra lệnh, đề nghị."],
   ex:[{f:"Tourne à gauche ! / Tournez à gauche !",v:"Rẽ trái đi!"},
@@ -592,7 +616,7 @@ const GRAMMAR_NOTES = {
  {t:"Articles contractés — Mạo từ rút gọn",
   pts:["à + le = au ; à + les = aux ; à la và à l' giữ nguyên.",
        "de + le = du ; de + les = des ; de la và de l' giữ nguyên.",
-       "Ví dụ: aller au musée, aller aux Calanques, venir du marché, venir des États-Unis."],
+       "Ví dụ: aller au musée, aller aux Calanques, venir du marché."],
   ex:[{f:"Je vais au musée. / Elle va à la banque. / Nous allons aux Calanques.",v:"Tôi đi bảo tàng. / Cô ấy đi ngân hàng. / Chúng tôi đi Calanques."},
       {f:"Je viens du marché. / Elle vient de la gare.",v:"Tôi từ chợ về. / Cô ấy từ nhà ga."}]},
  {t:"Prépositions de transport",
@@ -624,7 +648,7 @@ const GRAMMAR_NOTES = {
   pts:["On = nous (trong văn nói thân mật): On visite l'île = Nous visitons l'île.",
        "On = les gens (người ta, mọi người nói chung): À la Martinique, on parle français.",
        "Động từ theo sau « on » luôn chia ở ngôi thứ 3 số ít (như il/elle).",
-       "Ngữ cảnh quyết định nghĩa: nếu chỉ hành động của nhóm đang nói → nous ; nếu nói chung → les gens."],
+       "Ngữ cảnh quyết định nghĩa."],
   ex:[{f:"On va à la plage cet après-midi ?",v:"Chiều nay chúng ta đi biển nhé? (= nous)"},
       {f:"En France, on mange du fromage.",v:"Ở Pháp, người ta ăn phô mai. (= les gens)"}]},
  {t:"Localisation géographique",
@@ -657,7 +681,6 @@ const GRAMMAR_NOTES = {
 };
 
 /* ------------------------- 5. GRAMMAR QUESTIONS ------------------------- */
-/* [topic, question, options, correctIndex, explanation] */
 const GQ_RAW = {
 7:[
 ["Adjectifs démonstratifs","___ pantalon est trop grand.",["Ce","Cet","Cette","Ces"],0,"« pantalon » là danh từ giống đực số ít, bắt đầu bằng phụ âm → dùng « ce »."],
@@ -675,25 +698,25 @@ const GQ_RAW = {
 ["Adjectifs interrogatifs","___ vêtements sont en solde ?",["Quel","Quelle","Quels","Quelles"],2,"« vêtements » giống đực số nhiều → « quels »."],
 ["Adjectifs interrogatifs","___ taille faites-vous ?",["Quel","Quelle","Quels","Quelles"],1,"« taille » giống cái số ít → « quelle »."],
 ["Adjectifs interrogatifs","Choisis la phrase correcte.",["Quelles chaussures préfères-tu ?","Quels chaussures préfères-tu ?","Quelle chaussures préfères-tu ?","Quel chaussures préfères-tu ?"],0,"« chaussures » là giống cái số nhiều → « quelles »."],
-["Interrogation","Comment tu trouves ce blouson ? — ___",["Je le trouve très beau.","J'en prends deux.","Il coûte cinquante euros.","Oui, c'est ça."],0,"« Comment tu trouves… ? » hỏi ý kiến → trả lời bằng nhận xét: « Je le trouve très beau. »"],
+["Interrogation","Comment tu trouves ce blouson ? — ___",["Je le trouve très beau.","J'en prends deux.","Il coûte cinquante euros.","Oui, c'est ça."],0,"« Comment tu trouves… ? » hỏi ý kiến → trả lời bằng nhận xét."],
 ["Interrogation","Elle est comment, cette robe ? — ___",["Elle est trop chère.","Elle coûte quarante euros.","Elle est dans la vitrine.","Oui, j'aime bien."],0,"« Elle est comment ? » hỏi đặc điểm → trả lời bằng tính từ miêu tả."],
 ["Interrogation","___ coûte cette chemise ?",["Combien","Comment","Quelle","Quel"],0,"Hỏi giá dùng « Combien coûte… ? »"],
-["Interrogation","Ça ___ combien ?",["fait","est","coûte","a"],0,"Thành ngữ cố định: « Ça fait combien ? » = Tất cả bao nhiêu tiền?"],
+["Interrogation","Ça ___ combien ?",["fait","est","coûte","a"],0,"Thành ngữ cố định: « Ça fait combien ? »"],
 ["Interrogation","Câu hỏi đúng để hỏi giá là:",["Combien coûte ce sac ?","Comment coûte ce sac ?","Quel coûte ce sac ?","Où coûte ce sac ?"],0,"Chỉ « Combien coûte… ? » là đúng ngữ pháp để hỏi giá."],
 ["Interrogation","Để hỏi cỡ của một chiếc áo, bạn nói:",["Quelle taille ?","Quel taille ?","Combien taille ?","Comment taille ?"],0,"« taille » giống cái → « Quelle taille ? »"],
 ["Négation","Je ___ aime pas cette couleur.",["ne","n'","pas","non"],1,"« aime » bắt đầu bằng nguyên âm → ne rút thành n' : « Je n'aime pas »."],
-["Négation","Elle ___ pas de robe blanche.",["a","n'a","ne a","na"],1,"Phủ định của « elle a » là « elle n'a pas » (ne → n' trước nguyên âm)."],
+["Négation","Elle ___ pas de robe blanche.",["a","n'a","ne a","na"],1,"Phủ định của « elle a » là « elle n'a pas »."],
 ["Négation","Câu phủ định đúng của « Je prends ce pantalon. »",["Je ne prends pas ce pantalon.","Je prends ne pas ce pantalon.","Je pas prends ce pantalon.","Ne je prends pas ce pantalon."],0,"Cấu trúc: Sujet + ne + verbe + pas + complément."],
 ["Négation","Nous ___ sommes pas prêts.",["ne","n'","pas","non"],0,"« sommes » bắt đầu bằng phụ âm → giữ « ne »."],
 ["Négation","Cette veste n'est ___ chère.",["pas","ne","non","pas de"],0,"Sau « n'est » ta thêm « pas » để hoàn thành phủ định."],
 ["Négation","Choisis la phrase correcte.",["Ce pull n'est pas cher.","Ce pull ne est pas cher.","Ce pull est ne pas cher.","Ce pull n'est cher pas."],0,"« ne » rút thành « n' » trước « est »."],
-["Négation","Câu nào SAI?",["Je ne pas aime ce manteau.","Je n'aime pas ce manteau.","Elle ne prend pas ce jean.","Nous n'avons pas de chapeau."],0,"Trợ từ « pas » phải đứng SAU động từ, không đứng trước."],
+["Négation","Câu nào SAI?",["Je ne pas aime ce manteau.","Je n'aime pas ce manteau.","Elle ne prend pas ce jean.","Nous n'avons pas de chapeau."],0,"Trợ từ « pas » phải đứng SAU động từ."],
 ["Nombres","78 s'écrit :",["soixante-dix-huit","septante-huit","soixante-huit","quatre-vingt-huit"],0,"70 = soixante-dix → 78 = soixante-dix-huit."],
 ["Nombres","80 s'écrit :",["quatre-vingts","quatre-vingt","huitante","octante"],0,"80 = quatre-vingts (có -s vì là số cuối cùng)."],
-["Nombres","71 s'écrit :",["soixante et onze","soixante-onze","septante et un","soixante-dix-un"],0,"71 = soixante et onze (có « et » giữa hai phần)."],
+["Nombres","71 s'écrit :",["soixante et onze","soixante-onze","septante et un","soixante-dix-un"],0,"71 = soixante et onze (có « et »)."],
 ["Nombres","200 s'écrit :",["deux cents","deux cent","deux centaines","deuxième cent"],0,"« cent » lấy -s khi là số cuối: deux cents."],
-["Nombres","1000 s'écrit :",["mille","cent mille","milion","mille cent"],0,"1000 = mille, và « mille » không bao giờ có -s."],
-["Nombres","90 s'écrit :",["quatre-vingt-dix","nonante","neufante","quatre-vingt"],0,"90 = quatre-vingt-dix (4×20+10)."],
+["Nombres","1000 s'écrit :",["mille","cent mille","milion","mille cent"],0,"1000 = mille, « mille » không bao giờ có -s."],
+["Nombres","90 s'écrit :",["quatre-vingt-dix","nonante","neufante","quatre-vingt"],0,"90 = quatre-vingt-dix."],
 ["Nombres","Combien coûte ce sac ? — Il coûte ___ (80) euros.",["quatre-vingts","quatre-vingt","huitante","quatre-vingt-dix"],0,"80 euros → « quatre-vingts euros » (có -s)."]
 ],
 8:[
@@ -708,11 +731,11 @@ const GQ_RAW = {
 ["Prépositions de lieu","___ gauche de la porte, il y a une photo.",["À","Au","De","En"],0,"Cụm cố định: « à gauche de »."],
 ["Prépositions de lieu","___ droite du tableau, il y a une sculpture.",["À","Au","De","En"],0,"Cụm cố định: « à droite de »."],
 ["Prépositions de lieu","Le poète est ___ centre, entre le peintre et le musicien.",["au","à la","à l'","aux"],0,"« au centre » – à + le = au."],
-["Prépositions de lieu","Choisis la phrase correcte.",["La photo est contre le mur.","La photo est dans le mur.","La photo est sous le mur.","La photo est entre le mur."],0,"« contre le mur » = dựa vào tường. Các phương án khác sai nghĩa/ngữ pháp."],
+["Prépositions de lieu","Choisis la phrase correcte.",["La photo est contre le mur.","La photo est dans le mur.","La photo est sous le mur.","La photo est entre le mur."],0,"« contre le mur » = dựa vào tường."],
 ["Pronoms toniques","Đại từ nhấn mạnh thay cho « je » là :",["moi","me","mon","je"],0,"Pronom tonique của « je » là « moi »."],
 ["Pronoms toniques","Đại từ nhấn mạnh thay cho « tu » là :",["toi","te","ton","tu"],0,"Pronom tonique của « tu » là « toi »."],
-["Pronoms toniques","« La chemise n'est pas à moi. » — « à moi » là :",["un pronom tonique","un adjectif possessif","un article défini","un pronom sujet"],0,"« moi » sau giới từ « à » là đại từ nhấn mạnh (pronom tonique)."],
-["Pronoms toniques","Choisis la phrase correcte.",["Lui, il a un blouson noir.","Le lui a un blouson noir.","Lui a il un blouson noir.","Il a lui un blouson noir."],0,"Đại từ nhấn mạnh đứng đầu câu, tách bằng dấu phẩy, rồi chủ ngữ + động từ."],
+["Pronoms toniques","« La chemise n'est pas à moi. » — « à moi » là :",["un pronom tonique","un adjectif possessif","un article défini","un pronom sujet"],0,"« moi » sau giới từ « à » là đại từ nhấn mạnh."],
+["Pronoms toniques","Choisis la phrase correcte.",["Lui, il a un blouson noir.","Le lui a un blouson noir.","Lui a il un blouson noir.","Il a lui un blouson noir."],0,"Đại từ nhấn mạnh đứng đầu câu, tách bằng dấu phẩy."],
 ["Pronoms toniques","___, je préfère la peinture. (nhấn mạnh « je »)",["Moi","Je","Me","Mon"],0,"Dùng « Moi » để nhấn mạnh chủ ngữ."],
 ["Pronoms toniques","« Et toi ? » — « toi » thay cho :",["tu","te","ton","toi-même"],0,"« toi » là pronom tonique tương ứng với « tu »."],
 ["Pronoms toniques","Marie et Paul sont artistes. ___, ils habitent à Paris.",["Eux","Ils","Leur","Lui"],0,"Nhấn mạnh chủ ngữ số nhiều (nam/hỗn hợp) → « Eux »."],
@@ -727,7 +750,7 @@ const GQ_RAW = {
 ["Description","Le contraire de « devant » :",["derrière","sur","sous","entre"],0,"devant (trước) ≠ derrière (sau)."],
 ["Prépositions de lieu","Le musicien joue ___ piano.",["du","de le","de la","des"],0,"« jouer du piano » – de + le = du."],
 ["Description","« Il a les cheveux ___ et une moustache. » (tóc đen)",["noirs","noires","noir","noirés"],0,"« cheveux » là số nhiều giống đực → « noirs »."],
-["Description","Choisis la phrase correcte pour décrire une femme peintre.",["Cette femme est peintre.","Cette femme est un peintre.","Ce femme est peintre.","Cet femme est peintre."],0,"« femme » giống cái → « cette »; nghề nghiệp không dùng mạo từ sau « être »."]
+["Description","Choisis la phrase correcte pour décrire une femme peintre.",["Cette femme est peintre.","Cette femme est un peintre.","Ce femme est peintre.","Cet femme est peintre."],0,"« femme » giống cái → « cette »."]
 ],
 9:[
 ["Pronoms toniques","« chez ___ » = ở nhà chúng tôi",["nous","notre","on","se"],0,"« chez nous » = ở nhà chúng tôi."],
@@ -735,7 +758,7 @@ const GQ_RAW = {
 ["Pronoms toniques","« chez ___ » = ở nhà họ (toàn nữ)",["elles","eux","les","leurs"],0,"Toàn nữ số nhiều → « elles »."],
 ["Pronoms toniques","Paul et Marie ? Je vais chez ___ .",["eux","ils","leur","elles"],0,"Paul + Marie (hỗn hợp) → « eux »."],
 ["Pronoms toniques","Sophie et Léa ? Je vais chez ___ .",["elles","eux","leur","ils"],0,"Hai người nữ → « elles »."],
-["Pronoms toniques","Choisis la phrase correcte.",["Eux, ils louent un grand appartement.","Les ils louent un grand appartement.","Leur louent un grand appartement.","Ils eux louent un grand appartement."],0,"Đại từ nhấn mạnh đứng đầu câu, sau đó là chủ ngữ + động từ."],
+["Pronoms toniques","Choisis la phrase correcte.",["Eux, ils louent un grand appartement.","Les ils louent un grand appartement.","Leur louent un grand appartement.","Ils eux louent un grand appartement."],0,"Đại từ nhấn mạnh đứng đầu câu."],
 ["Pronoms toniques","Complète : « Ce placard est à ___ . » (của chúng tôi)",["nous","notre","on","se"],0,"Sau giới từ « à » dùng pronom tonique « nous »."],
 ["Pronoms toniques","Đại từ nhấn mạnh dùng để :",["nhấn mạnh chủ ngữ hoặc sau giới từ","thay tân ngữ trực tiếp","chỉ sở hữu","chỉ thời gian"],0,"Pronoms toniques dùng để nhấn mạnh hoặc đứng sau giới từ."],
 ["Prépositions","L'appartement est ___ face de la gare.",["en","au","à la","de"],0,"Cụm cố định « en face de » = đối diện."],
@@ -770,7 +793,7 @@ const GQ_RAW = {
 ["Impératif","(tu) ___ devant la poste.",["Passe","Passes","Passez","Passer"],0,"Động từ nhóm 1 với « tu » mất -s → Passe !"],
 ["Impératif","(vous) ___ la rue.",["Traversez","Traverse","Traverses","Traverser"],0,"Với « vous »: Traversez."],
 ["Impératif","L'impératif de « aller » avec « nous » :",["allons","allons-nous","allons !","va"],0,"Dạng mệnh lệnh ngôi « nous » là « allons »."],
-["Impératif","Choisis la phrase correcte (impératif, forme « tu »).",["Va tout droit !","Vas tout droit !","Allez tout droit !","Aller tout droit !"],0,"« aller » với « tu » ở mệnh lệnh là « Va » (không có -s)."],
+["Impératif","Choisis la phrase correcte (impératif, forme « tu »).",["Va tout droit !","Vas tout droit !","Allez tout droit !","Aller tout droit !"],0,"« aller » với « tu » ở mệnh lệnh là « Va »."],
 ["Prendre","Je ___ le métro.",["prends","prend","prenons","prenez"],0,"je prends."],
 ["Prendre","Nous ___ le bus.",["prenons","prends","prennent","prenez"],0,"nous prenons."],
 ["Prendre","Ils ___ le train.",["prennent","prend","prenons","prenez"],0,"ils prennent (2 chữ n)."],
@@ -839,7 +862,7 @@ const GQ_RAW = {
 ["On","À Marseille, on ___ le français.",["parle","parlons","parlent","parles"],0,"on parle (ngôi 3 số ít)."],
 ["Révision prépositions","Le bateau est ___ côté du quai.",["à","au","en","de"],0,"« à côté de » = bên cạnh."],
 ["Révision articles","Prends ___ bateau pour aller au Château d'If.",["le","du","au","de"],0,"« prendre le bateau » – mạo từ xác định sau động từ prendre."],
-["Révision impératif","Choisis la phrase correcte.",["Va au Vieux-Port et tourne à gauche.","Va au Vieux-Port et tournes à gauche.","Vas au Vieux-Port et tourne à gauche.","Va au Vieux-Port et tournez à gauche."],0,"Mệnh lệnh « tu » của « aller » là « va » và của « tourner » là « tourne »."],
+["Révision impératif","Choisis la phrase correcte.",["Va au Vieux-Port et tourne à gauche.","Va au Vieux-Port et tournes à gauche.","Vas au Vieux-Port et tourne à gauche.","Va au Vieux-Port et tournez à gauche."],0,"Mệnh lệnh « tu » của « aller » là « va » et của « tourner » là « tourne »."],
 ["On","« On visite Notre-Dame-de-la-Garde. » — « on » = ",["nous ou les gens","je","tu","elle"],0,"Tùy ngữ cảnh, on có thể là nous hoặc les gens."],
 ["Révision prépositions","La basilique est ___ haut de la colline.",["en","au","à la","dans"],0,"Cụm cố định: « en haut de »."],
 ["Géographie","Les Calanques sont ___ sud de Marseille.",["au","en","à la","dans"],0,"« au sud de » – à + le = au."],
@@ -937,7 +960,7 @@ const COMM_RAW = {
 ]
 };
 
-/* ------------------------- 7. TRANSLATION (VI → FR, tự luận) ------------------------- */
+/* ------------------------- 7. TRANSLATION ------------------------- */
 const TRANS = {
 7:[["Chiếc váy này bao nhiêu tiền ?","Combien coûte cette robe ?"],
    ["Tôi muốn thử chiếc áo sơ mi này.","Je veux essayer cette chemise."],
@@ -1254,18 +1277,14 @@ const BANK = [];
 let QID = 0;
 function addQ(o){o.uid = o.uid || ("q"+(++QID)); BANK.push(o); return o;}
 
-/* 14.1 Vocabulaire auto-généré : FR → VI et VI → FR */
 Object.keys(VOCAB).forEach(ls=>{
   const L = Number(ls);
-  const list = VOCAB[ls];
-  list.forEach((it,i)=>{
-    // FR -> VI
+  VOCAB[ls].forEach((it,i)=>{
     const others = shuffle(ALL_VOCAB.filter(x=>x.v!==it.v && norm(x.v)!==norm(it.v))).slice(0,3);
     let opts = shuffle([it.v].concat(others.map(x=>x.v)));
     addQ({id:"v"+L+"-"+i+"-a", lesson:L, skill:"vocab", topic:"Vocabulaire",
       type:"mcq", q:"« "+it.w+" » nghĩa là gì ?", options:opts,
       answer:opts.indexOf(it.v), explain:"« "+it.w+" » ("+it.p+") = "+it.v+"."});
-    // VI -> FR
     const others2 = shuffle(ALL_VOCAB.filter(x=>x.w!==it.w && norm(x.w)!==norm(it.w))).slice(0,3);
     let opts2 = shuffle([it.w].concat(others2.map(x=>x.w)));
     addQ({id:"v"+L+"-"+i+"-b", lesson:L, skill:"vocab", topic:"Vocabulaire",
@@ -1274,17 +1293,14 @@ Object.keys(VOCAB).forEach(ls=>{
   });
 });
 
-/* 14.2 Grammaire */
 Object.keys(GQ_RAW).forEach(ls=>{
   const L = Number(ls);
   GQ_RAW[ls].forEach((r,i)=>{
-    const opts = r[2];
     addQ({id:"g"+L+"-"+i, lesson:L, skill:"grammar", topic:r[0],
-      type:"mcq", q:r[1], options:opts, answer:r[3], explain:r[4]});
+      type:"mcq", q:r[1], options:r[2], answer:r[3], explain:r[4]});
   });
 });
 
-/* 14.3 Communication */
 Object.keys(COMM_RAW).forEach(ls=>{
   const L = Number(ls);
   COMM_RAW[ls].forEach((r,i)=>{
@@ -1293,7 +1309,6 @@ Object.keys(COMM_RAW).forEach(ls=>{
   });
 });
 
-/* 14.4 Traduction (tự luận) */
 Object.keys(TRANS).forEach(ls=>{
   const L = Number(ls);
   TRANS[ls].forEach((r,i)=>{
@@ -1303,7 +1318,6 @@ Object.keys(TRANS).forEach(ls=>{
   });
 });
 
-/* 14.5 Sắp xếp câu */
 Object.keys(ORDER).forEach(ls=>{
   const L = Number(ls);
   ORDER[ls].forEach((words,i)=>{
@@ -1314,15 +1328,13 @@ Object.keys(ORDER).forEach(ls=>{
   });
 });
 
-/* 14.6 Đọc hiểu */
-READING.forEach((rd,ri)=>{
+READING.forEach(rd=>{
   rd.qs.forEach((q,qi)=>{
     addQ({id:"r"+rd.lesson+"-"+qi, lesson:rd.lesson, skill:"reading", topic:"Lecture : "+rd.title,
       type:"mcq", q:q[0], options:q[1], answer:q[2], explain:q[3]});
   });
 });
 
-/* 14.7 Nghe hiểu (câu hỏi dựa trên transcript, có thể phát audio bằng TTS) */
 LISTENING.forEach((li,li2)=>{
   li.qs.forEach((q,qi)=>{
     addQ({id:"l"+li.lesson+"-"+qi, lesson:li.lesson, skill:"listening", topic:"Écoute : "+li.title,
@@ -1331,19 +1343,12 @@ LISTENING.forEach((li,li2)=>{
 });
 
 /* ------------------------- 15. STATE ------------------------- */
-const LS_KEY = "fls_taxi1_v1";
+const LS_KEY = "fls_taxi1_v2";
 const DEFAULT_STATE = {
-  xp:0,
-  sessions:0,
-  streak:0,
-  lastStudyDate:null,
-  lastLesson:null,
-  lastActivity:null,
+  xp:0, sessions:0, streak:0, lastStudyDate:null, lastLesson:null, lastActivity:null,
   stats:{vocab:{c:0,t:0},grammar:{c:0,t:0},communication:{c:0,t:0},reading:{c:0,t:0},listening:{c:0,t:0}},
-  lessonStats:{},
-  mistakes:{},
-  vocabStatus:{},
-  finalResults:[],
+  lessonStats:{}, mistakes:{}, vocabStatus:{}, finalResults:[],
+  fcPrefs:{mode:"flip", lesson:"all", status:"all"},
   settings:{dark:false, font:16, sound:true}
 };
 let state = loadState();
@@ -1356,41 +1361,31 @@ function loadState(){
     return Object.assign(JSON.parse(JSON.stringify(DEFAULT_STATE)), s);
   }catch(e){ return JSON.parse(JSON.stringify(DEFAULT_STATE)); }
 }
-function saveState(){
-  try{ localStorage.setItem(LS_KEY, JSON.stringify(state)); }catch(e){}
-}
+function saveState(){ try{ localStorage.setItem(LS_KEY, JSON.stringify(state)); }catch(e){} }
 function todayStr(){return new Date().toISOString().slice(0,10);}
 function touchSession(){
   const t = todayStr();
   if(state.lastStudyDate === t) return;
   const y = new Date(Date.now()-86400000).toISOString().slice(0,10);
   state.streak = (state.lastStudyDate === y) ? (state.streak+1) : 1;
-  state.lastStudyDate = t;
-  state.sessions += 1;
-  saveState();
+  state.lastStudyDate = t; state.sessions += 1; saveState();
 }
 function recordAnswer(q, correct, userAns){
   touchSession();
   const sk = q.skill || "vocab";
   if(!state.stats[sk]) state.stats[sk]={c:0,t:0};
-  state.stats[sk].t++;
-  if(correct) state.stats[sk].c++;
+  state.stats[sk].t++; if(correct) state.stats[sk].c++;
   if(!state.lessonStats[q.lesson]) state.lessonStats[q.lesson]={c:0,t:0};
-  state.lessonStats[q.lesson].t++;
-  if(correct) state.lessonStats[q.lesson].c++;
+  state.lessonStats[q.lesson].t++; if(correct) state.lessonStats[q.lesson].c++;
   state.xp += correct ? 10 : 2;
   state.lastLesson = q.lesson;
   state.lastActivity = new Date().toLocaleString("vi-VN");
   if(!correct){
     const prev = state.mistakes[q.id];
-    state.mistakes[q.id] = {
-      id:q.id, lesson:q.lesson, skill:q.skill, topic:q.topic,
+    state.mistakes[q.id] = { id:q.id, lesson:q.lesson, skill:q.skill, topic:q.topic,
       q:q.q, options:q.options||null, answer:q.answer, explain:q.explain,
-      yourAnswer:userAns||"", count: prev?prev.count+1:1, resolved:false
-    };
-  } else if(state.mistakes[q.id]){
-    state.mistakes[q.id].resolved = true;
-  }
+      yourAnswer:userAns||"", count: prev?prev.count+1:1, resolved:false };
+  } else if(state.mistakes[q.id]){ state.mistakes[q.id].resolved = true; }
   saveState();
 }
 
@@ -1401,10 +1396,7 @@ function pickVoice(){
   const vs = speechSynthesis.getVoices();
   frVoice = vs.find(v=>v.lang && v.lang.toLowerCase().startsWith("fr")) || null;
 }
-if("speechSynthesis" in window){
-  pickVoice();
-  speechSynthesis.onvoiceschanged = pickVoice;
-}
+if("speechSynthesis" in window){ pickVoice(); speechSynthesis.onvoiceschanged = pickVoice; }
 function speak(text, rate){
   if(!state.settings.sound){ toast("Âm thanh đang tắt trong Cài đặt."); return; }
   if(!("speechSynthesis" in window)){ toast("Trình duyệt không hỗ trợ đọc văn bản (TTS)."); return; }
@@ -1420,30 +1412,28 @@ function speak(text, rate){
 function audioUnavailableNotice(){
   if("speechSynthesis" in window){
     if(frVoice) return '<p class="muted">🔊 Ứng dụng dùng giọng đọc tổng hợp của trình duyệt (không phải bản thu của người thật). Hãy bấm nút loa để nghe.</p>';
-    return '<p class="muted">🔊 Trình duyệt chưa có giọng tiếng Pháp. Bạn vẫn có thể đọc phần transcript bên dưới để luyện nghe hiểu.</p>';
+    return '<p class="muted">🔊 Trình duyệt chưa có giọng tiếng Pháp. Bạn vẫn có thể đọc transcript bên dưới.</p>';
   }
-  return '<p class="muted">🔊 Trình duyệt không hỗ trợ đọc văn bản. Vui lòng dùng phần transcript bên dưới.</p>';
+  return '<p class="muted">🔊 Trình duyệt không hỗ trợ đọc văn bản. Vui lòng dùng transcript.</p>';
 }
 
 /* ------------------------- 17. ROUTER ------------------------- */
 const VIEWS = ["dashboard","lessons","lesson","vocab","grammar","flashcards","practice",
   "listening","reading","writing","speaking","extra","mistakes","final","progress","settings"];
 let currentView = "dashboard";
-let currentParam = null;
 
 function go(view, param){
-  currentView = view; currentParam = param||null;
+  currentView = view;
+  if(currentView !== "flashcards" && fcTimer){ clearInterval(fcTimer); fcTimer = null; }
   $$(".navbtn").forEach(b=>b.classList.toggle("active", b.dataset.nav===view));
   $("#sidebar").classList.remove("open");
-  const main = $("#main");
-  main.innerHTML = "";
+  const main = $("#main"); main.innerHTML = "";
   const fn = {
     dashboard:renderDashboard, lessons:renderLessons, lesson:()=>renderLesson(param),
     vocab:renderVocab, grammar:renderGrammar, flashcards:renderFlashcards,
     practice:renderPractice, listening:renderListening, reading:renderReading,
     writing:renderWriting, speaking:renderSpeaking, extra:renderExtra,
-    mistakes:renderMistakes, final:renderFinal, progress:renderProgress,
-    settings:renderSettings
+    mistakes:renderMistakes, final:renderFinal, progress:renderProgress, settings:renderSettings
   }[view];
   if(fn) fn();
   main.focus({preventScroll:true});
@@ -1451,12 +1441,10 @@ function go(view, param){
 }
 
 /* ------------------------- 18. DASHBOARD ------------------------- */
-function totalQuestions(){return BANK.length;}
 function totalVocab(){return ALL_VOCAB.length;}
 function totalGrammarTopics(){let n=0;Object.values(GQ_RAW).forEach(a=>n+=a.length);return n;}
 function overallStats(){
-  let c=0,t=0;
-  Object.values(state.stats).forEach(s=>{c+=s.c;t+=s.t;});
+  let c=0,t=0; Object.values(state.stats).forEach(s=>{c+=s.c;t+=s.t;});
   return {c,t,acc:pct(c,t)};
 }
 function renderDashboard(){
@@ -1475,9 +1463,8 @@ function renderDashboard(){
       <div class="stat"><div class="n">${BANK.length}</div><div class="l">Tổng câu hỏi trong ngân hàng</div></div>
     </div>
   </div>
-
   <div class="grid g4">
-    <div class="stat"><div class="n">${state.stats ? Object.values(state.stats).reduce((a,s)=>a+s.t,0) : 0}</div><div class="l">Câu đã làm</div></div>
+    <div class="stat"><div class="n">${Object.values(state.stats).reduce((a,s)=>a+s.t,0)}</div><div class="l">Câu đã làm</div></div>
     <div class="stat"><div class="n">${ov.acc}%</div><div class="l">Độ chính xác tổng</div></div>
     <div class="stat"><div class="n">${state.streak}</div><div class="l">Chuỗi ngày học 🔥</div></div>
     <div class="stat"><div class="n">${state.sessions}</div><div class="l">Buổi học</div></div>
@@ -1486,7 +1473,6 @@ function renderDashboard(){
     <div class="stat"><div class="n">${mistakeCount}</div><div class="l">Lỗi cần ôn</div></div>
     <div class="stat"><div class="n">${state.finalResults.length ? Math.max(...state.finalResults.map(r=>r.score))+"%" : "—"}</div><div class="l">Điểm kiểm tra cao nhất</div></div>
   </div>
-
   <div class="card">
     <h3>Tiến độ theo kỹ năng</h3>
     ${["vocab","grammar","reading","listening","communication"].map(sk=>{
@@ -1494,8 +1480,7 @@ function renderDashboard(){
       const label = {vocab:"Từ vựng",grammar:"Ngữ pháp",reading:"Đọc hiểu",listening:"Nghe hiểu",communication:"Giao tiếp"}[sk];
       return `<div style="margin:.55rem 0">
         <div class="row" style="justify-content:space-between"><span>${label}</span><span class="muted">${s.c}/${s.t} · ${pct(s.c,s.t)}%</span></div>
-        <div class="bar"><i style="width:${pct(s.c,s.t)}%"></i></div>
-      </div>`;
+        <div class="bar"><i style="width:${pct(s.c,s.t)}%"></i></div></div>`;
     }).join("")}
     <h3>Tiến độ theo bài học</h3>
     ${LESSONS.map(L=>{
@@ -1503,19 +1488,17 @@ function renderDashboard(){
       return `<div style="margin:.55rem 0">
         <div class="row" style="justify-content:space-between">
           <span>Leçon ${L.id} — ${esc(L.title)}</span>
-          <span class="muted">${s.c}/${s.t} · ${pct(s.c,s.t)}%</span>
-        </div>
-        <div class="bar"><i style="width:${pct(s.c,s.t)}%"></i></div>
-      </div>`;
+          <span class="muted">${s.c}/${s.t} · ${pct(s.c,s.t)}%</span></div>
+        <div class="bar"><i style="width:${pct(s.c,s.t)}%"></i></div></div>`;
     }).join("")}
   </div>
-
   <div class="card">
     <h3>Hành động nhanh</h3>
     <div class="row">
       <button class="btn" data-act="continue">▶️ Tiếp tục học</button>
       <button class="btn sec" data-act="quick-vocab">🔤 Luyện từ vựng</button>
       <button class="btn sec" data-act="quick-grammar">📐 Luyện ngữ pháp</button>
+      <button class="btn sec" data-act="flash">🃏 Flashcards</button>
       <button class="btn sec" data-act="review">❌ Ôn lỗi sai</button>
       <button class="btn sec" data-act="final">🏁 Kiểm tra cuối</button>
       <button class="btn sec" data-act="extra">⚙️ Bài tập thêm</button>
@@ -1529,13 +1512,11 @@ function renderDashboard(){
   m.querySelectorAll("[data-act]").forEach(b=>b.addEventListener("click",()=>dashboardAction(b.dataset.act)));
 }
 function dashboardAction(a){
-  if(a==="continue"){
-    if(state.lastLesson) go("lesson", state.lastLesson); else go("lessons");
-  } else if(a==="quick-vocab"){
-    openQuiz(pick(BANK.filter(q=>q.skill==="vocab"),20),"Luyện từ vựng");
-  } else if(a==="quick-grammar"){
-    openQuiz(pick(BANK.filter(q=>q.skill==="grammar"),20),"Luyện ngữ pháp");
-  } else if(a==="review"){ go("mistakes"); }
+  if(a==="continue"){ if(state.lastLesson) go("lesson", state.lastLesson); else go("lessons"); }
+  else if(a==="quick-vocab"){ openQuiz(pick(BANK.filter(q=>q.skill==="vocab"),20),"Luyện từ vựng"); }
+  else if(a==="quick-grammar"){ openQuiz(pick(BANK.filter(q=>q.skill==="grammar"),20),"Luyện ngữ pháp"); }
+  else if(a==="flash"){ go("flashcards"); }
+  else if(a==="review"){ go("mistakes"); }
   else if(a==="final"){ go("final"); }
   else if(a==="extra"){ go("extra"); }
   else if(a==="reset"){ resetWithConfirm(); }
@@ -1561,8 +1542,7 @@ function renderLessons(){
         <div class="row" style="margin-top:.7rem">
           <button class="btn sm" data-les="${L.id}">Mở bài học</button>
           <button class="btn sec sm" data-lesquiz="${L.id}">Luyện tập nhanh</button>
-        </div>
-      </div>`;
+        </div></div>`;
     }).join("")}
   </div>`;
   $$("[data-les]").forEach(b=>b.addEventListener("click",()=>go("lesson",Number(b.dataset.les))));
@@ -1571,13 +1551,11 @@ function renderLessons(){
     openQuiz(pick(BANK.filter(q=>q.lesson===L && (q.skill==="vocab"||q.skill==="grammar")),20),"Leçon "+L+" — Luyện tập");
   }));
 }
-
 function renderLesson(id){
   const L = LESSONS.find(x=>x.id===id);
   if(!L){ go("lessons"); return; }
   state.lastLesson = id; saveState();
-  const vocab = VOCAB[id];
-  const gnotes = GRAMMAR_NOTES[id];
+  const vocab = VOCAB[id], gnotes = GRAMMAR_NOTES[id];
   const s = state.lessonStats[id]||{c:0,t:0};
   $("#main").innerHTML = `
   <div class="card">
@@ -1593,28 +1571,20 @@ function renderLesson(id){
       <button class="btn sec" data-lq="vocab">🔤 Chỉ từ vựng</button>
       <button class="btn sec" data-lq="grammar">📐 Chỉ ngữ pháp</button>
       <button class="btn ghost" data-lq="comm">💬 Giao tiếp</button>
+      <button class="btn ghost" data-lflash="${L.id}">🃏 Flashcards Leçon ${L.id}</button>
     </div>
   </div>
-
   <div class="card">
     <h3>🔤 Từ vựng Leçon ${L.id} (${vocab.length} mục)</h3>
-    <div style="overflow-x:auto">
-    <table>
+    <div style="overflow-x:auto"><table>
       <thead><tr><th>Français</th><th>IPA</th><th>Loại từ</th><th>Tiếng Việt</th><th>Ví dụ</th><th></th></tr></thead>
-      <tbody>
-      ${vocab.map((v,i)=>`<tr>
-        <td class="fr">${esc(v.w)}</td>
-        <td class="muted">${esc(v.ipa)}</td>
-        <td class="muted">${esc(v.p)}</td>
-        <td>${esc(v.v)}</td>
+      <tbody>${vocab.map(v=>`<tr>
+        <td class="fr">${esc(v.w)}</td><td class="muted">${esc(v.ipa)}</td>
+        <td class="muted">${esc(v.p)}</td><td>${esc(v.v)}</td>
         <td>${esc(v.e)}<br><small class="muted">${esc(v.ev)}</small></td>
         <td><button class="btn sec sm" data-say="${esc(v.w)}" aria-label="Nghe ${esc(v.w)}">🔊</button></td>
-      </tr>`).join("")}
-      </tbody>
-    </table>
-    </div>
+      </tr>`).join("")}</tbody></table></div>
   </div>
-
   <div class="card">
     <h3>📐 Ngữ pháp Leçon ${L.id}</h3>
     ${gnotes.map(g=>`
@@ -1623,8 +1593,7 @@ function renderLesson(id){
       <div style="margin:.4rem 0">
       ${g.ex.map(e=>`<div class="row" style="margin:.15rem 0">
         <button class="btn sec sm" data-say="${esc(e.f)}">🔊</button>
-        <span><span class="fr">${esc(e.f)}</span> — <span class="muted">${esc(e.v)}</span></span>
-      </div>`).join("")}
+        <span><span class="fr">${esc(e.f)}</span> — <span class="muted">${esc(e.v)}</span></span></div>`).join("")}
       </div>`).join("")}
   </div>`;
   $("#backLes").addEventListener("click",()=>go("lessons"));
@@ -1637,6 +1606,12 @@ function renderLesson(id){
     if(kind==="comm") pool = pool.filter(q=>q.skill==="communication");
     openQuiz(pick(pool,20),"Leçon "+id+" — Luyện tập");
   }));
+  $$("[data-lflash]").forEach(b=>b.addEventListener("click",()=>{
+    const L = Number(b.dataset.lflash);
+    state.fcPrefs.lesson = String(L);
+    go("flashcards");
+    setTimeout(()=>{ if($("#fcLesson")) $("#fcLesson").value = String(L); fcBuildAndStart(); }, 60);
+  }));
 }
 
 /* ------------------------- 20. VOCABULARY VIEW ------------------------- */
@@ -1644,19 +1619,18 @@ function renderVocab(){
   $("#main").innerHTML = `
   <div class="card">
     <h2>🔤 Từ vựng — Leçons 7 à 12</h2>
-    <p class="muted">Tra cứu toàn bộ ${ALL_VOCAB.length} mục từ vựng. Bấm 🔊 để nghe phát âm (giọng tổng hợp của trình duyệt).</p>
+    <p class="muted">Tra cứu toàn bộ ${ALL_VOCAB.length} mục từ vựng. Bấm 🔊 để nghe phát âm.</p>
     <div class="row">
       <select id="vLesson" aria-label="Chọn bài"><option value="all">Tất cả bài học</option>
-        ${LESSONS.map(L=>`<option value="${L.id}">Leçon ${L.id} — ${esc(L.title)}</option>`).join("")}
-      </select>
+        ${LESSONS.map(L=>`<option value="${L.id}">Leçon ${L.id} — ${esc(L.title)}</option>`).join("")}</select>
       <input type="text" id="vSearch" placeholder="Tìm từ tiếng Pháp hoặc nghĩa tiếng Việt…" aria-label="Tìm từ vựng">
       <button class="btn sec" id="vQuiz">Luyện 20 câu từ vựng</button>
+      <button class="btn ghost" id="vFlash">🃏 Flashcards</button>
     </div>
   </div>
   <div class="card" id="vList"></div>`;
   const render = ()=>{
-    const ls = $("#vLesson").value;
-    const kw = norm($("#vSearch").value);
+    const ls = $("#vLesson").value, kw = norm($("#vSearch").value);
     let items = ALL_VOCAB.filter(x=>ls==="all"||x.lesson===Number(ls));
     if(kw) items = items.filter(x=>norm(x.w).includes(kw)||norm(x.v).includes(kw));
     $("#vList").innerHTML = items.length ? `
@@ -1675,6 +1649,7 @@ function renderVocab(){
   $("#vLesson").addEventListener("change",render);
   $("#vSearch").addEventListener("input",render);
   $("#vQuiz").addEventListener("click",()=>openQuiz(pick(BANK.filter(q=>q.skill==="vocab"),20),"Luyện từ vựng"));
+  $("#vFlash").addEventListener("click",()=>go("flashcards"));
   render();
 }
 
@@ -1707,116 +1682,642 @@ function renderGrammar(){
   }));
 }
 
-/* ------------------------- 22. FLASHCARDS ------------------------- */
-let fcDeck = [], fcIdx = 0, fcFilter = {lesson:"all", status:"all"};
+/* =========================================================================
+   22. FLASHCARDS — CHẾ ĐỘ HỌC THẺ MỞ RỘNG (6 CHẾ ĐỘ)
+   ========================================================================= */
+const FC_MODES = [
+  {id:"flip",      icon:"🔄", label:"Lật thẻ",   desc:"Xem từ & lật để biết nghĩa"},
+  {id:"mcq",       icon:"📝", label:"Chọn nghĩa", desc:"Chọn nghĩa tiếng Việt đúng"},
+  {id:"typing",    icon:"⌨️", label:"Gõ từ",    desc:"Nhập từ tiếng Pháp theo nghĩa"},
+  {id:"listening", icon:"🎧", label:"Nghe",     desc:"Nghe và chọn từ đúng"},
+  {id:"speed",     icon:"⚡", label:"Đua tốc độ", desc:"60 giây, trả lời nhiều nhất"},
+  {id:"matching",  icon:"🔗", label:"Nối cặp",  desc:"Nối từ Pháp với nghĩa Việt"}
+];
+
+let fcState = {
+  mode: "flip",
+  deck: [],
+  idx: 0,
+  flipped: false,
+  answered: false,
+  chosen: null,
+  mcqOpts: [],
+  listenOpts: [],
+  typed: "",
+  session: { studied:0, correct:0, wrong:0 },
+  speed: { timeLeft:60, timer:null, active:false, score:0, wrong:0 },
+  matching: { left:[], right:[], selL:null, selR:null, matched:[], wrongPair:null, done:0 }
+};
+let fcTimer = null;
+
+function fcStatusOf(c){ return state.vocabStatus[c.lesson+"|"+c.w] || ""; }
+function fcMarkFlag(c, flag){
+  const key = c.lesson+"|"+c.w;
+  let s = state.vocabStatus[key] || "";
+  s = (s.indexOf(flag) >= 0) ? s.replace(flag,"") : (s + flag);
+  state.vocabStatus[key] = s;
+  saveState();
+}
+function fcStatusChip(st){
+  if(!st) return '<span class="tag" style="opacity:.7">chưa đánh dấu</span>';
+  const parts = [];
+  if(st.indexOf("known")>=0)     parts.push('<span class="tag" style="background:#17724a;color:#fff">✅ đã biết</span>');
+  if(st.indexOf("difficult")>=0) parts.push('<span class="tag" style="background:#c07a1a;color:#fff">⚠️ khó</span>');
+  if(st.indexOf("fav")>=0)       parts.push('<span class="tag" style="background:#b8447a;color:#fff">⭐ yêu thích</span>');
+  return parts.join(" ");
+}
+function fcFilterDeck(){
+  const lesson = $("#fcLesson") ? $("#fcLesson").value : "all";
+  const status = $("#fcStatus") ? $("#fcStatus").value : "all";
+  const kw = $("#fcSearch") ? norm($("#fcSearch").value) : "";
+  let pool = ALL_VOCAB.slice();
+  if(lesson !== "all") pool = pool.filter(x => x.lesson === Number(lesson));
+  if(status !== "all"){
+    pool = pool.filter(x => {
+      const s = fcStatusOf(x);
+      if(status === "new") return !s;
+      return s.indexOf(status) >= 0;
+    });
+  }
+  if(kw) pool = pool.filter(x => norm(x.w).includes(kw) || norm(x.v).includes(kw));
+  // Ưu tiên thẻ khó lên đầu
+  const diff = pool.filter(x=>fcStatusOf(x).indexOf("difficult")>=0);
+  const rest = pool.filter(x=>fcStatusOf(x).indexOf("difficult")<0);
+  return shuffle(diff).concat(shuffle(rest));
+}
+
 function renderFlashcards(){
+  // Nếu đang trong chế độ speed và có timer -> giữ nguyên
+  if(fcState.mode === "speed" && fcState.speed.active){
+    renderSpeedScreen();
+    return;
+  }
+  const pref = state.fcPrefs || {mode:"flip", lesson:"all", status:"all"};
+  fcState.mode = pref.mode || "flip";
+
   $("#main").innerHTML = `
   <div class="card">
-    <h2>🃏 Flashcards</h2>
-    <p class="muted">Bấm vào thẻ để lật. Đánh dấu « Đã biết », « Khó » hoặc « Yêu thích ».</p>
-    <div class="row">
-      <select id="fcLesson" aria-label="Lọc theo bài">
-        <option value="all">Tất cả bài</option>
-        ${LESSONS.map(L=>`<option value="${L.id}">Leçon ${L.id}</option>`).join("")}
-      </select>
-      <select id="fcStatus" aria-label="Lọc theo trạng thái">
-        <option value="all">Tất cả trạng thái</option>
-        <option value="new">Chưa đánh dấu</option>
-        <option value="known">Đã biết</option>
-        <option value="difficult">Khó</option>
-        <option value="fav">Yêu thích</option>
-      </select>
-      <button class="btn sec sm" id="fcShuffle">🔀 Xáo trộn</button>
+    <h2>🃏 Flashcards — Chế độ học thẻ</h2>
+    <p class="muted">Chọn chế độ, lọc và bắt đầu học. Điểm XP được cộng cho mỗi câu trả lời đúng.</p>
+
+    <div class="fc-modes" id="fcModes"></div>
+
+    <div class="grid g3" style="margin-top:.5rem">
+      <label>Bài học
+        <select id="fcLesson" aria-label="Lọc theo bài">
+          <option value="all">Tất cả (L7–L12)</option>
+          ${LESSONS.map(L=>`<option value="${L.id}">Leçon ${L.id} — ${esc(L.title)}</option>`).join("")}
+        </select>
+      </label>
+      <label>Trạng thái
+        <select id="fcStatus" aria-label="Lọc theo trạng thái">
+          <option value="all">Tất cả</option>
+          <option value="new">Chưa đánh dấu</option>
+          <option value="known">Đã biết</option>
+          <option value="difficult">Khó</option>
+          <option value="fav">Yêu thích</option>
+        </select>
+      </label>
+      <label>Tìm từ
+        <input type="text" id="fcSearch" placeholder="Tìm tiếng Pháp / Việt…">
+      </label>
+    </div>
+    <div class="row" style="margin-top:.6rem">
+      <button class="btn" id="fcStart">▶️ Bắt đầu phiên học</button>
+      <button class="btn sec sm" id="fcShuffleBtn">🔀 Xáo trộn deck</button>
+      <button class="btn sec sm" id="fcResetSession">🔄 Đặt lại phiên</button>
+    </div>
+    <div class="fc-stats">
+      <div class="fc-stat">Đã học: <strong id="fcS1">0</strong></div>
+      <div class="fc-stat">Đúng: <strong id="fcS2">0</strong></div>
+      <div class="fc-stat">Sai: <strong id="fcS3">0</strong></div>
+      <div class="fc-stat">Tỉ lệ: <strong id="fcS4">—</strong></div>
     </div>
   </div>
-  <div class="card">
-    <div id="fcCounter" class="muted" style="text-align:center"></div>
+  <div class="card" id="fcArea"><p class="muted">Nhấn « Bắt đầu phiên học » để bắt đầu.</p></div>`;
+
+  // Render mode buttons
+  const modesBox = $("#fcModes");
+  FC_MODES.forEach(m=>{
+    const b = document.createElement("button");
+    b.className = "fc-mode" + (m.id===fcState.mode ? " active" : "");
+    b.type = "button";
+    b.innerHTML = `<span>${m.icon}</span><span><strong>${m.label}</strong><small>${m.desc}</small></span>`;
+    b.addEventListener("click", ()=>{
+      if(fcState.speed.active) stopSpeedRound();
+      fcState.mode = m.id;
+      state.fcPrefs.mode = m.id; saveState();
+      renderFlashcards();
+    });
+    modesBox.appendChild(b);
+  });
+
+  // Restore pref selects
+  if(pref.lesson) $("#fcLesson").value = pref.lesson;
+  if(pref.status) $("#fcStatus").value = pref.status;
+  $("#fcLesson").addEventListener("change", e=>{ state.fcPrefs.lesson = e.target.value; saveState(); });
+  $("#fcStatus").addEventListener("change", e=>{ state.fcPrefs.status = e.target.value; saveState(); });
+
+  $("#fcStart").addEventListener("click", fcStart);
+  $("#fcShuffleBtn").addEventListener("click", ()=>{
+    if(fcState.deck.length){ fcState.deck = shuffle(fcState.deck); fcState.idx = 0; fcRenderCurrent(); toast("Đã xáo trộn."); }
+    else toast("Chưa có deck — hãy bắt đầu phiên học trước.");
+  });
+  $("#fcResetSession").addEventListener("click", ()=>{
+    fcState.session = { studied:0, correct:0, wrong:0 };
+    fcState.deck = []; fcState.idx = 0;
+    $("#fcArea").innerHTML = '<p class="muted">Nhấn « Bắt đầu phiên học » để bắt đầu.</p>';
+    fcUpdateSessionStats();
+    toast("Đã đặt lại phiên học.");
+  });
+
+  // Nếu đang có deck -> render lại
+  if(fcState.deck.length){
+    fcRenderCurrent();
+  }
+  fcUpdateSessionStats();
+}
+
+function fcStart(){
+  const deck = fcFilterDeck();
+  if(!deck.length){ toast("Không có thẻ nào phù hợp bộ lọc."); return; }
+  if(fcState.mode === "speed"){
+    startSpeedRound(deck);
+    return;
+  }
+  fcState.deck = deck;
+  fcState.idx = 0;
+  fcState.session = { studied:0, correct:0, wrong:0 };
+  fcRenderCurrent();
+  fcUpdateSessionStats();
+  toast("Bắt đầu phiên học : "+deck.length+" thẻ.");
+}
+
+function fcUpdateSessionStats(){
+  const s = fcState.session;
+  if($("#fcS1")) $("#fcS1").textContent = s.studied;
+  if($("#fcS2")) $("#fcS2").textContent = s.correct;
+  if($("#fcS3")) $("#fcS3").textContent = s.wrong;
+  if($("#fcS4")) $("#fcS4").textContent = (s.studied ? Math.round(s.correct*100/s.studied)+"%" : "—");
+}
+
+function fcRenderCurrent(){
+  const area = $("#fcArea"); if(!area) return;
+  const mode = fcState.mode;
+
+  if(mode === "speed"){ renderSpeedScreen(); return; }
+
+  if(!fcState.deck.length){
+    area.innerHTML = '<p class="muted">Nhấn « Bắt đầu phiên học » để bắt đầu.</p>';
+    return;
+  }
+  const c = fcState.deck[fcState.idx];
+
+  if(mode === "flip"){ renderFlip(area, c); return; }
+  if(mode === "mcq"){ renderMCQ(area, c); return; }
+  if(mode === "typing"){ renderTyping(area, c); return; }
+  if(mode === "listening"){ renderListening(area, c); return; }
+  if(mode === "matching"){ renderMatching(area); return; }
+}
+
+/* ---------- FLIP ---------- */
+function renderFlip(area, c){
+  fcState.flipped = false;
+  area.innerHTML = `
+    <div class="row" style="justify-content:space-between;align-items:center">
+      <div class="row" style="gap:.35rem">
+        <span class="tag">Leçon ${c.lesson}</span>
+        <span class="tag">${esc(c.p)}</span>
+        ${fcStatusChip(fcStatusOf(c))}
+      </div>
+      <span class="muted">Thẻ ${fcState.idx+1} / ${fcState.deck.length}</span>
+    </div>
+    <div class="progressbar"><i style="width:${Math.round((fcState.idx+1)*100/fcState.deck.length)}%"></i></div>
+
     <div class="flashwrap" style="margin-top:.6rem">
       <div class="flash" id="flashCard" role="button" tabindex="0" aria-label="Lật thẻ">
         <div class="face front">
-          <div class="big" id="fcFront"></div>
-          <div class="muted" id="fcIpa"></div>
-          <small class="muted">Bấm để xem nghĩa</small>
+          <div class="big">${esc(c.w)}</div>
+          <div class="muted">${esc(c.ipa)}</div>
+          <small class="muted" style="margin-top:.7rem">Bấm hoặc nhấn Space để lật</small>
         </div>
         <div class="face back">
-          <div class="vi" id="fcBack"></div>
-          <div class="muted" id="fcEx" style="margin-top:.6rem"></div>
-          <div class="muted" id="fcExVi" style="font-size:.85rem"></div>
+          <div class="vi">${esc(c.v)}</div>
+          <div class="fr" style="margin-top:.6rem">${esc(c.e)}</div>
+          <div class="muted" style="font-size:.85rem">${esc(c.ev)}</div>
         </div>
       </div>
     </div>
+
     <div class="row" style="justify-content:center;margin-top:1rem">
       <button class="btn sec sm" id="fcPrev">⬅️ Trước</button>
-      <button class="btn sec sm" id="fcSpeak">🔊 Nghe</button>
+      <button class="btn sec sm" id="fcFlipBtn">🔄 Lật</button>
+      <button class="btn sec sm" id="fcSay">🔊 Nghe</button>
       <button class="btn sec sm" id="fcNext">Tiếp ➡️</button>
     </div>
-    <div class="row" style="justify-content:center;margin-top:.6rem">
-      <button class="btn sm" id="fcKnown">✅ Đã biết</button>
-      <button class="btn sm" id="fcDiff" style="background:#c07a1a">⚠️ Khó</button>
-      <button class="btn sm" id="fcFav" style="background:#b8447a">⭐ Yêu thích</button>
-    </div>
-    <p class="muted" style="text-align:center;margin-top:.7rem" id="fcStat"></p>
-  </div>`;
-  const build = ()=>{
-    const ls = $("#fcLesson").value, st = $("#fcStatus").value;
-    let deck = ALL_VOCAB.slice();
-    if(ls!=="all") deck = deck.filter(x=>x.lesson===Number(ls));
-    if(st!=="all"){
-      deck = deck.filter(x=>{
-        const s = state.vocabStatus[x.lesson+"|"+x.w] || "";
-        if(st==="new") return !s;
-        return s.indexOf(st)>=0;
-      });
-    }
-    fcDeck = deck; fcIdx = 0; showCard();
-  };
-  $("#fcLesson").addEventListener("change",build);
-  $("#fcStatus").addEventListener("change",build);
-  $("#fcShuffle").addEventListener("click",()=>{fcDeck=shuffle(fcDeck);fcIdx=0;showCard();toast("Đã xáo trộn thẻ.");});
+    <div class="row" style="justify-content:center;margin-top:.5rem">
+      <button class="btn sm" id="fcK">✅ Đã biết</button>
+      <button class="btn sm" id="fcD" style="background:#c07a1a">⚠️ Khó</button>
+      <button class="btn sm" id="fcF" style="background:#b8447a">⭐ Yêu thích</button>
+    </div>`;
+
   const card = $("#flashCard");
-  card.addEventListener("click",()=>card.classList.toggle("flipped"));
-  card.addEventListener("keydown",e=>{if(e.key===" "||e.key==="Enter"){e.preventDefault();card.classList.toggle("flipped");}});
-  $("#fcNext").addEventListener("click",()=>{if(fcDeck.length){fcIdx=(fcIdx+1)%fcDeck.length;showCard();}});
-  $("#fcPrev").addEventListener("click",()=>{if(fcDeck.length){fcIdx=(fcIdx-1+fcDeck.length)%fcDeck.length;showCard();}});
-  $("#fcSpeak").addEventListener("click",()=>{if(fcDeck[fcIdx]) speak(fcDeck[fcIdx].w);});
-  const mark = (k)=>{
-    const c = fcDeck[fcIdx]; if(!c) return;
-    const key = c.lesson+"|"+c.w;
-    let s = state.vocabStatus[key] || "";
-    s = (s.indexOf(k)>=0) ? s.replace(k,"") : (s+k);
-    state.vocabStatus[key] = s;
-    saveState(); showCard(); toast("Đã cập nhật trạng thái thẻ.");
-  };
-  $("#fcKnown").addEventListener("click",()=>mark("known"));
-  $("#fcDiff").addEventListener("click",()=>mark("difficult"));
-  $("#fcFav").addEventListener("click",()=>mark("fav"));
-  build();
+  const flip = ()=>{ card.classList.toggle("flipped"); fcState.flipped = !fcState.flipped; };
+  card.addEventListener("click", flip);
+  card.addEventListener("keydown", e=>{ if(e.key===" "||e.key==="Enter"){ e.preventDefault(); flip(); } });
+  $("#fcFlipBtn").addEventListener("click", flip);
+  $("#fcSay").addEventListener("click", ()=>speak(c.w));
+  $("#fcPrev").addEventListener("click", ()=>fcNav(-1));
+  $("#fcNext").addEventListener("click", ()=>{ fcState.session.studied++; fcUpdateSessionStats(); fcNav(1); });
+  $("#fcK").addEventListener("click", ()=>{ fcMarkFlag(c,"known"); toast("Đã đánh dấu « đã biết »."); fcNav(1); });
+  $("#fcD").addEventListener("click", ()=>{ fcMarkFlag(c,"difficult"); toast("Đã đánh dấu « khó »."); fcNav(1); });
+  $("#fcF").addEventListener("click", ()=>{ fcMarkFlag(c,"fav"); toast("Đã thêm vào yêu thích."); });
 }
-function showCard(){
-  const card = $("#flashCard");
-  if(card) card.classList.remove("flipped");
-  if(!fcDeck.length){
-    $("#fcFront").textContent = "—";
-    $("#fcIpa").textContent = "";
-    $("#fcBack").textContent = "Không có thẻ nào phù hợp bộ lọc.";
-    $("#fcEx").textContent = ""; $("#fcExVi").textContent = "";
-    $("#fcCounter").textContent = "";
-    $("#fcStat").textContent = "";
-    return;
+
+/* ---------- MCQ (Chọn nghĩa) ---------- */
+function renderMCQ(area, c){
+  if(fcState.idx !== fcState._lastIdx_mcq || !fcState.mcqOpts.length){
+    fcState.mcqOpts = fcPickOpts(c, "v", 4);
+    fcState._lastIdx_mcq = fcState.idx;
+    fcState.answered = false;
+    fcState.chosen = null;
   }
-  const c = fcDeck[fcIdx];
-  $("#fcFront").textContent = c.w;
-  $("#fcIpa").textContent = c.ipa + " · " + c.p;
-  $("#fcBack").textContent = c.v;
-  $("#fcEx").textContent = c.e;
-  $("#fcExVi").textContent = c.ev;
-  $("#fcCounter").textContent = `Thẻ ${fcIdx+1} / ${fcDeck.length} · Leçon ${c.lesson}`;
-  const st = state.vocabStatus[c.lesson+"|"+c.w] || "";
-  const known = ALL_VOCAB.filter(x=>(state.vocabStatus[x.lesson+"|"+x.w]||"").indexOf("known")>=0).length;
-  const diff = ALL_VOCAB.filter(x=>(state.vocabStatus[x.lesson+"|"+x.w]||"").indexOf("difficult")>=0).length;
-  const fav = ALL_VOCAB.filter(x=>(state.vocabStatus[x.lesson+"|"+x.w]||"").indexOf("fav")>=0).length;
-  $("#fcStat").textContent = `Trạng thái thẻ này: ${st||"chưa đánh dấu"} · Tổng: đã biết ${known} · khó ${diff} · yêu thích ${fav}`;
+  const opts = fcState.mcqOpts;
+  area.innerHTML = `
+    <div class="row" style="justify-content:space-between;align-items:center">
+      <div class="row" style="gap:.35rem">
+        <span class="tag">Leçon ${c.lesson}</span>${fcStatusChip(fcStatusOf(c))}</div>
+      <span class="muted">Thẻ ${fcState.idx+1} / ${fcState.deck.length}</span>
+    </div>
+    <div class="progressbar"><i style="width:${Math.round((fcState.idx+1)*100/fcState.deck.length)}%"></i></div>
+    <h3 style="margin-top:.8rem">Nghĩa tiếng Việt của « <span class="fr">${esc(c.w)}</span> » là gì ?</h3>
+    <div class="muted" style="font-size:.9rem">${esc(c.ipa)} · ${esc(c.p)}</div>
+    <div id="fcOpts" style="margin-top:.7rem"></div>
+    <div id="fcFb"></div>
+    <div class="row" style="justify-content:center;margin-top:.7rem">
+      <button class="btn sec sm" id="fcSay">🔊 Nghe</button>
+      <button class="btn sec sm" id="fcNext">Tiếp ➡️</button>
+    </div>`;
+  const wrap = $("#fcOpts"), fb = $("#fcFb");
+  opts.forEach((o)=>{
+    const b = document.createElement("button");
+    b.className = "opt"; b.type = "button";
+    if(fcState.answered){
+      b.disabled = true;
+      if(o.w === c.w) b.classList.add("correct");
+      else if(fcState.chosen && fcState.chosen.w === o.w) b.classList.add("wrong");
+    }
+    b.innerHTML = `<span class="muted" style="margin-right:.4rem">›</span> ${esc(o.v)}`;
+    b.addEventListener("click", ()=>{
+      if(fcState.answered) return;
+      fcState.answered = true; fcState.chosen = o;
+      const ok = o.w === c.w;
+      wrap.querySelectorAll(".opt").forEach(bb=>{
+        bb.disabled = true;
+        const ow = opts.find(x=>x.v === bb.textContent.replace("› ","").trim()) || opts[[...wrap.children].indexOf(bb)];
+      });
+      // Redraw classes properly
+      [...wrap.children].forEach((bb,i)=>{
+        bb.disabled = true;
+        if(opts[i].w === c.w) bb.classList.add("correct");
+        if(i !== opts.findIndex(x=>x.w===c.w) && opts[i].w === o.w) bb.classList.add("wrong");
+      });
+      fb.className = "fb "+(ok?"ok":"no");
+      fb.innerHTML = (ok?"✅ Chính xác ! ":"❌ Chưa đúng. Đáp án : <strong>"+esc(c.v)+"</strong>. ")+"« "+esc(c.w)+" » = "+esc(c.v)+".";
+      fcState.session.studied++; if(ok) fcState.session.correct++; else fcState.session.wrong++;
+      fcUpdateSessionStats();
+      recordAnswer({id:"fc-mcq-"+c.lesson+"-"+c.idx, lesson:c.lesson, skill:"vocab", topic:"Flashcard MCQ"},
+        ok, o.v);
+      speak(c.w);
+    });
+    wrap.appendChild(b);
+  });
+  if(fcState.answered){
+    const idx = opts.findIndex(x=>x.w === c.w);
+    [...wrap.children].forEach((bb,i)=>{
+      bb.disabled = true;
+      if(i === idx) bb.classList.add("correct");
+      if(fcState.chosen && i !== idx && opts[i].w === fcState.chosen.w) bb.classList.add("wrong");
+    });
+    const ok = fcState.chosen && fcState.chosen.w === c.w;
+    fb.className = "fb "+(ok?"ok":"no");
+    fb.innerHTML = (ok?"✅ Chính xác ! ":"❌ Đáp án : <strong>"+esc(c.v)+"</strong>. ")+"« "+esc(c.w)+" » = "+esc(c.v)+".";
+  }
+  $("#fcSay").addEventListener("click", ()=>speak(c.w));
+  $("#fcNext").addEventListener("click", ()=>fcNav(1));
 }
+
+/* ---------- TYPING (Gõ từ) ---------- */
+function renderTyping(area, c){
+  fcState.answered = false;
+  fcState.typed = "";
+  area.innerHTML = `
+    <div class="row" style="justify-content:space-between;align-items:center">
+      <div class="row" style="gap:.35rem">
+        <span class="tag">Leçon ${c.lesson}</span>${fcStatusChip(fcStatusOf(c))}</div>
+      <span class="muted">Thẻ ${fcState.idx+1} / ${fcState.deck.length}</span>
+    </div>
+    <div class="progressbar"><i style="width:${Math.round((fcState.idx+1)*100/fcState.deck.length)}%"></i></div>
+    <h3 style="margin-top:.8rem">Từ tiếng Pháp cho « <strong>${esc(c.v)}</strong> » là gì ?</h3>
+    <div class="muted" style="font-size:.9rem">Gợi ý : ${esc(c.p)} · ${esc(c.ipa)}</div>
+    <input type="text" id="fcTyped" placeholder="Nhập từ tiếng Pháp…" autocomplete="off" spellcheck="false" style="margin-top:.7rem">
+    <div id="fcFb"></div>
+    <div class="row" style="margin-top:.7rem">
+      <button class="btn" id="fcCheck">Kiểm tra</button>
+      <button class="btn sec sm" id="fcReveal">Xem đáp án</button>
+      <button class="btn sec sm" id="fcSay">🔊 Nghe từ đúng</button>
+      <button class="btn sec sm" id="fcNext" style="display:none">Tiếp ➡️</button>
+    </div>`;
+  const inp = $("#fcTyped"), fb = $("#fcFb");
+  inp.focus();
+  const finish = (ok, val)=>{
+    fcState.answered = true; fcState.typed = val;
+    fb.className = "fb "+(ok?"ok":"no");
+    fb.innerHTML = (ok?"✅ Chính xác ! ":"❌ Chưa đúng. Đáp án : <strong>"+esc(c.w)+"</strong>. ")
+      +"« "+esc(c.w)+" » = "+esc(c.v)+".";
+    fcState.session.studied++; if(ok) fcState.session.correct++; else fcState.session.wrong++;
+    fcUpdateSessionStats();
+    recordAnswer({id:"fc-type-"+c.lesson+"-"+c.idx, lesson:c.lesson, skill:"vocab", topic:"Flashcard Typing"},
+      ok, val);
+    if(ok){ speak(c.w); } else { fcMarkFlag(c,"difficult"); }
+    $("#fcCheck").disabled = true; $("#fcReveal").disabled = true;
+    $("#fcNext").style.display = "inline-block";
+  };
+  const check = ()=>{
+    if(fcState.answered) return;
+    const v = inp.value.trim();
+    if(!v){ toast("Hãy nhập câu trả lời."); return; }
+    finish(looseEq(v, c.w), v);
+  };
+  $("#fcCheck").addEventListener("click", check);
+  inp.addEventListener("keydown", e=>{ if(e.key==="Enter") check(); });
+  $("#fcReveal").addEventListener("click", ()=>{
+    if(fcState.answered) return;
+    finish(false, "(xem đáp án)");
+  });
+  $("#fcSay").addEventListener("click", ()=>speak(c.w));
+  $("#fcNext").addEventListener("click", ()=>fcNav(1));
+}
+
+/* ---------- LISTENING ---------- */
+function renderListening(area, c){
+  if(fcState.idx !== fcState._lastIdx_list || !fcState.listenOpts.length){
+    fcState.listenOpts = fcPickOpts(c, "w", 4);
+    fcState._lastIdx_list = fcState.idx;
+    fcState.answered = false;
+    fcState.chosen = null;
+  }
+  const opts = fcState.listenOpts;
+  area.innerHTML = `
+    <div class="row" style="justify-content:space-between;align-items:center">
+      <div class="row" style="gap:.35rem">
+        <span class="tag">Leçon ${c.lesson}</span>${fcStatusChip(fcStatusOf(c))}</div>
+      <span class="muted">Thẻ ${fcState.idx+1} / ${fcState.deck.length}</span>
+    </div>
+    <div class="progressbar"><i style="width:${Math.round((fcState.idx+1)*100/fcState.deck.length)}%"></i></div>
+    <h3 style="margin-top:.8rem">🎧 Nghe và chọn từ tiếng Pháp đúng</h3>
+    <p class="muted">Bấm loa để nghe lại. Nghĩa tiếng Việt : <strong>${esc(c.v)}</strong></p>
+    <div class="row" style="margin-top:.6rem">
+      <button class="btn" id="fcPlay">🔊 Phát âm</button>
+      <button class="btn sec sm" id="fcPlaySlow">🐢 Chậm</button>
+    </div>
+    <div id="fcOpts" style="margin-top:.7rem"></div>
+    <div id="fcFb"></div>
+    <div class="row" style="margin-top:.7rem">
+      <button class="btn sec sm" id="fcNext" style="display:none">Tiếp ➡️</button>
+    </div>`;
+  const wrap = $("#fcOpts"), fb = $("#fcFb");
+  opts.forEach((o)=>{
+    const b = document.createElement("button");
+    b.className = "opt"; b.type = "button"; b.textContent = o.w;
+    b.addEventListener("click", ()=>{
+      if(fcState.answered) return;
+      fcState.answered = true; fcState.chosen = o;
+      const ok = o.w === c.w;
+      [...wrap.children].forEach((bb,i)=>{
+        bb.disabled = true;
+        if(opts[i].w === c.w) bb.classList.add("correct");
+        if(i !== opts.findIndex(x=>x.w===c.w) && opts[i].w === o.w) bb.classList.add("wrong");
+      });
+      fb.className = "fb "+(ok?"ok":"no");
+      fb.innerHTML = (ok?"✅ Chính xác ! ":"❌ Đáp án đúng : <strong>"+esc(c.w)+"</strong>. ")
+        +"« "+esc(c.w)+" » = "+esc(c.v)+".";
+      fcState.session.studied++; if(ok) fcState.session.correct++; else fcState.session.wrong++;
+      fcUpdateSessionStats();
+      recordAnswer({id:"fc-listen-"+c.lesson+"-"+c.idx, lesson:c.lesson, skill:"listening", topic:"Flashcard Listening"},
+        ok, o.w);
+      $("#fcNext").style.display = "inline-block";
+    });
+    wrap.appendChild(b);
+  });
+  const play = ()=>speak(c.w, 0.9);
+  const playSlow = ()=>speak(c.w, 0.6);
+  $("#fcPlay").addEventListener("click", play);
+  $("#fcPlaySlow").addEventListener("click", playSlow);
+  $("#fcNext").addEventListener("click", ()=>fcNav(1));
+  play();
+}
+
+/* ---------- MATCHING ---------- */
+function renderMatching(area){
+  if(!fcState.matching.pairs.length){
+    const pool = fcState.deck.slice(0, Math.min(6, fcState.deck.length));
+    fcState.matching.pairs = pool.map(p=>({fr:p.w, vi:p.v, lesson:p.lesson, w:p.w}));
+    fcState.matching.left = shuffle(fcState.matching.pairs.map(p=>({type:"fr", w:p.fr, key:p.fr})));
+    fcState.matching.right = shuffle(fcState.matching.pairs.map(p=>({type:"vi", w:p.vi, key:p.fr})));
+    fcState.matching.matched = [];
+    fcState.matching.selL = null;
+    fcState.matching.selR = null;
+    fcState.matching.wrongPair = null;
+    fcState.matching.rounds = (fcState.matching.rounds||0) + 1;
+  }
+  const st = fcState.matching;
+  area.innerHTML = `
+    <div class="row" style="justify-content:space-between;align-items:center">
+      <div class="row" style="gap:.35rem">
+        <span class="tag">Nối cặp</span>
+        <span class="tag">Vòng ${st.rounds||1}</span>
+        <span class="tag">${st.matched.length} / ${st.pairs.length}</span>
+      </div>
+      <button class="btn sec sm" id="fcNewRound">🔄 Vòng mới</button>
+    </div>
+    <p class="muted">Chọn một thẻ tiếng Pháp (trái) và một thẻ tiếng Việt (phải) tương ứng. Nối đúng sẽ tô xanh.</p>
+    <div class="match-grid">
+      <div class="match-col" id="mcolL"></div>
+      <div class="match-col" id="mcolR"></div>
+    </div>
+    <div id="fcFb"></div>
+    <div class="row" style="margin-top:.7rem">
+      <button class="btn sec sm" id="fcNextRound" style="display:none">➡️ Vòng tiếp</button>
+    </div>`;
+  const colL = $("#mcolL"), colR = $("#mcolR"), fb = $("#fcFb");
+  const draw = ()=>{
+    colL.innerHTML = ""; colR.innerHTML = "";
+    st.left.forEach(l=>{
+      const b = document.createElement("button");
+      b.className = "match-card" + (st.selL && st.selL.key === l.key ? " sel":"")
+        + (st.matched.includes(l.key) ? " done":"");
+      b.type="button";
+      b.innerHTML = `<span class="fr">${esc(l.w)}</span>`;
+      if(!st.matched.includes(l.key)) b.addEventListener("click", ()=>{ st.selL = l; fcTryMatch(); });
+      colL.appendChild(b);
+    });
+    st.right.forEach(r=>{
+      const b = document.createElement("button");
+      b.className = "match-card" + (st.selR && st.selR.key === r.key ? " sel":"")
+        + (st.matched.includes(r.key) ? " done":"");
+      b.type="button";
+      b.textContent = r.w;
+      if(!st.matched.includes(r.key)) b.addEventListener("click", ()=>{ st.selR = r; fcTryMatch(); });
+      colR.appendChild(b);
+    });
+    if(st.matched.length === st.pairs.length && st.pairs.length){
+      fb.className = "fb ok";
+      fb.innerHTML = "✅ Hoàn thành vòng nối cặp ! Tất cả đúng.";
+      $("#fcNextRound").style.display = "inline-block";
+    }
+  };
+  window.fcTryMatch = ()=>{
+    if(!st.selL || !st.selR) { draw(); return; }
+    const ok = st.selL.key === st.selR.key;
+    const c = st.pairs.find(p=>p.fr === st.selL.key);
+    fcState.session.studied++;
+    if(ok){ fcState.session.correct++; st.matched.push(st.selL.key); fb.className = "fb ok";
+      fb.innerHTML = "✅ Đúng : « "+esc(st.selL.w)+" » = « "+esc(st.selR.w)+" ».";
+      if(c) fcMarkFlag({lesson:c.lesson, w:c.w},"known");
+      speak(st.selL.w);
+    } else {
+      fcState.session.wrong++;
+      fb.className = "fb no";
+      fb.innerHTML = "❌ Chưa đúng. Hãy thử lại.";
+      if(c) fcMarkFlag({lesson:c.lesson, w:c.w},"difficult");
+    }
+    fcUpdateSessionStats();
+    st.selL = null; st.selR = null;
+    draw();
+  };
+  draw();
+  $("#fcNewRound").addEventListener("click", ()=>{
+    fcState.matching.pairs = [];
+    renderMatching(area);
+  });
+  $("#fcNextRound").addEventListener("click", ()=>{
+    fcState.matching.pairs = [];
+    renderMatching(area);
+  });
+}
+
+/* ---------- SPEED ROUND ---------- */
+function startSpeedRound(deck){
+  if(!deck || !deck.length){ toast("Không có thẻ nào."); return; }
+  fcState.speed = { timeLeft:60, timer:null, active:true, score:0, wrong:0, deck: shuffle(deck), idx:0, answered:false, chosen:null, opts:[] };
+  fcTimer = setInterval(fcSpeedTick, 1000);
+  renderSpeedScreen();
+}
+function stopSpeedRound(){
+  if(fcTimer){ clearInterval(fcTimer); fcTimer = null; }
+  fcState.speed.active = false;
+}
+function fcSpeedTick(){
+  const sp = fcState.speed;
+  if(!sp.active) { stopSpeedRound(); return; }
+  sp.timeLeft--;
+  if(sp.timeLeft <= 0){ sp.timeLeft = 0; stopSpeedRound(); fcSpeedFinish(); return; }
+  const el = $("#fcSpeedTimer");
+  if(el){
+    el.textContent = sp.timeLeft+"s";
+    el.className = "speed-timer" + (sp.timeLeft <= 10 ? " danger" : sp.timeLeft <= 20 ? " warn" : "");
+  }
+}
+function renderSpeedScreen(){
+  const sp = fcState.speed;
+  if(!sp.active){ renderSpeedFinish(); return; }
+  const c = sp.deck[sp.idx % sp.deck.length];
+  if(!sp.opts.length || sp._lastFor !== sp.idx){
+    sp.opts = fcPickOpts(c, "v", 4);
+    sp._lastFor = sp.idx;
+    sp.answered = false;
+    sp.chosen = null;
+  }
+  $("#main").innerHTML = `
+  <div class="card" style="text-align:center">
+    <h2 style="margin:0">⚡ Đua tốc độ — 60 giây</h2>
+    <div id="fcSpeedTimer" class="speed-timer">${sp.timeLeft}s</div>
+    <div class="row" style="justify-content:center;gap:.8rem">
+      <span class="fc-stat">Câu đúng: <strong>${sp.score}</strong></span>
+      <span class="fc-stat">Câu sai: <strong>${sp.wrong}</strong></span>
+      <span class="fc-stat">Chuỗi: <strong>${sp.streak||0}</strong></span>
+    </div>
+    <div class="progressbar" style="margin-top:.8rem"><i style="width:${Math.round(sp.timeLeft*100/60)}%"></i></div>
+    <h3 style="margin-top:1rem">Nghĩa tiếng Việt của « <span class="fr">${esc(c.w)}</span> » ?</h3>
+    <div id="fcSpeedOpts" style="max-width:520px;margin:.6rem auto 0"></div>
+    <div class="row" style="justify-content:center;margin-top:.9rem">
+      <button class="btn sec sm" id="fcSpeedStop">⏹️ Dừng sớm</button>
+    </div>
+  </div>`;
+  const wrap = $("#fcSpeedOpts");
+  sp.opts.forEach((o,i)=>{
+    const b = document.createElement("button");
+    b.className = "opt"; b.type = "button";
+    b.innerHTML = `<span class="muted" style="margin-right:.4rem">${i+1}.</span> ${esc(o.v)}`;
+    b.addEventListener("click", ()=>{
+      if(sp.answered) return;
+      sp.answered = true; sp.chosen = o;
+      const ok = o.w === c.w;
+      [...wrap.children].forEach((bb,ii)=>{
+        bb.disabled = true;
+        if(sp.opts[ii].w === c.w) bb.classList.add("correct");
+        if(ii !== sp.opts.findIndex(x=>x.w===c.w) && sp.opts[ii].w === o.w) bb.classList.add("wrong");
+      });
+      if(ok){ sp.score++; sp.streak = (sp.streak||0)+1; }
+      else { sp.wrong++; sp.streak = 0; fcMarkFlag(c,"difficult"); }
+      recordAnswer({id:"fc-speed-"+c.lesson+"-"+c.idx, lesson:c.lesson, skill:"vocab", topic:"Speed Round"},
+        ok, o.v);
+      setTimeout(()=>{ sp.idx++; sp.opts=[]; if(sp.active) renderSpeedScreen(); }, 320);
+    });
+    wrap.appendChild(b);
+  });
+  $("#fcSpeedStop").addEventListener("click", ()=>{ stopSpeedRound(); fcSpeedFinish(); });
+}
+function fcSpeedFinish(){
+  const sp = fcState.speed;
+  $("#main").innerHTML = `
+  <div class="card">
+    <h2>🏁 Kết thúc đua tốc độ</h2>
+    <div class="grid g3">
+      <div class="stat"><div class="n">${sp.score}</div><div class="l">Câu đúng</div></div>
+      <div class="stat"><div class="n">${sp.wrong}</div><div class="l">Câu sai</div></div>
+      <div class="stat"><div class="n">${sp.score+sp.wrong}</div><div class="l">Tổng trả lời</div></div>
+    </div>
+    <p class="muted">Mỗi câu trả lời đúng đã được cộng XP.</p>
+    <div class="row" style="margin-top:.9rem">
+      <button class="btn" id="fcSpeedAgain">🔁 Chơi lại</button>
+      <button class="btn sec" id="fcSpeedExit">🏠 Về Flashcards</button>
+    </div>
+  </div>`;
+  $("#fcSpeedAgain").addEventListener("click", ()=>{ startSpeedRound(fcFilterDeck()); });
+  $("#fcSpeedExit").addEventListener("click", ()=>{ fcState.mode = "flip"; state.fcPrefs.mode = "flip"; saveState(); renderFlashcards(); });
+}
+
+/* ---------- HELPERS FLASHCARD ---------- */
+function fcPickOpts(c, keyField, n){
+  const others = shuffle(ALL_VOCAB.filter(x=>x[keyField] !== c[keyField] && norm(x[keyField]) !== norm(c[keyField]))).slice(0, n-1);
+  return shuffle([c].concat(others));
+}
+function fcNav(delta){
+  if(!fcState.deck.length) return;
+  fcState.idx = (fcState.idx + delta + fcState.deck.length) % fcState.deck.length;
+  // reset per-card state
+  fcState.mcqOpts = []; fcState.listenOpts = [];
+  fcState.answered = false; fcState.chosen = null;
+  fcRenderCurrent();
+}
+
+function fcBuildAndStart(){ fcStart(); }
+
+/* =========================================================================
+   END FLASHCARDS
+   ========================================================================= */
 
 /* ------------------------- 23. QUIZ ENGINE ------------------------- */
 let Q = null;
@@ -1838,6 +2339,7 @@ function renderQuiz(){
         <button class="btn sec" data-m="mix">🎯 Tổng hợp (25 câu)</button>
         <button class="btn ghost" data-m="trans">🌐 Dịch Việt → Pháp</button>
         <button class="btn ghost" data-m="order">🧩 Sắp xếp câu</button>
+        <button class="btn ghost" data-m="flash">🃏 Flashcards</button>
       </div></div>`;
     main.querySelectorAll("[data-m]").forEach(b=>b.addEventListener("click",()=>{
       const k = b.dataset.m;
@@ -1847,6 +2349,7 @@ function renderQuiz(){
       else if(k==="mix") openQuiz(pick(BANK,25),"Tổng hợp");
       else if(k==="trans") openQuiz(pick(BANK.filter(q=>q.type==="text"),12),"Dịch Việt → Pháp");
       else if(k==="order") openQuiz(pick(BANK.filter(q=>q.type==="order"),12),"Sắp xếp câu");
+      else if(k==="flash") go("flashcards");
     }));
     return;
   }
@@ -1932,10 +2435,7 @@ function renderQuiz(){
     let placed = [];
     const draw = ()=>{
       drop.innerHTML = placed.map((w,i)=>`<span class="chip in" data-back="${i}">${esc(w)}</span>`).join("");
-      chips.innerHTML = shuffled.map((w,i)=>{
-        const used = placed.filter((p,pi)=>pi<placed.length && p===w).length;
-        return `<span class="chip" data-fwd="${i}">${esc(w)}</span>`;
-      }).join("");
+      chips.innerHTML = shuffled.map((w,i)=>`<span class="chip" data-fwd="${i}">${esc(w)}</span>`).join("");
       drop.querySelectorAll("[data-back]").forEach(el=>el.addEventListener("click",()=>{
         placed.splice(Number(el.dataset.back),1); draw();
       }));
@@ -2036,13 +2536,12 @@ function renderListening(){
     </div>
     <h4 style="margin-top:1rem">Câu hỏi nghe hiểu</h4>
     <div id="listenQ"></div>
-    <h4 style="margin-top:1.2rem">Transcript (chỉ mở sau khi trả lời)</h4>
+    <h4 style="margin-top:1.2rem">Transcript</h4>
     <button class="btn ghost sm" id="showTranscript">👁️ Hiện transcript</button>
     <div id="transcript" style="display:none;margin-top:.6rem">
       ${li.lines.map(l=>`<div class="row" style="margin:.2rem 0">
         <button class="btn sec sm" data-say="${esc(l.fr)}">🔊</button>
-        <span><strong>${esc(l.sp)} :</strong> <span class="fr">${esc(l.fr)}</span></span>
-      </div>`).join("")}
+        <span><strong>${esc(l.sp)} :</strong> <span class="fr">${esc(l.fr)}</span></span></div>`).join("")}
     </div>
   </div>`;
   $$("[data-li]").forEach(b=>b.addEventListener("click",()=>{listenIdx=Number(b.dataset.li);renderListening();}));
@@ -2053,7 +2552,6 @@ function renderListening(){
     const t = $("#transcript"); t.style.display = t.style.display==="none"?"block":"none";
   });
   $$("[data-say]").forEach(b=>b.addEventListener("click",()=>speak(b.dataset.say)));
-  // câu hỏi nghe hiểu (dạng MCQ đơn giản, có phản hồi)
   const wrap = $("#listenQ");
   li.qs.forEach((q,qi)=>{
     const box = document.createElement("div");
@@ -2074,8 +2572,7 @@ function renderListening(){
       });
       box.appendChild(b);
     });
-    box.appendChild(fb);
-    wrap.appendChild(box);
+    box.appendChild(fb); wrap.appendChild(box);
   });
 }
 
@@ -2126,8 +2623,7 @@ function renderReading(){
         });
         box.appendChild(b);
       });
-      box.appendChild(fb);
-      wrap.appendChild(box);
+      box.appendChild(fb); wrap.appendChild(box);
     });
   });
 }
@@ -2185,7 +2681,6 @@ function renderSpeaking(){
   <div class="card">
     <h2>🗣️ Luyện nói</h2>
     <p class="muted">Chuẩn bị ý tưởng, sau đó nói trong thời gian quy định và tự đánh giá theo danh sách kiểm tra.</p>
-    <p class="muted">Nếu trình duyệt không hỗ trợ nhận dạng giọng nói, bạn vẫn có thể luyện nói và tự đánh giá.</p>
   </div>
   ${SPEAKING.map((s,i)=>`
     <div class="card">
@@ -2233,7 +2728,7 @@ function renderExtra(){
   <div class="card">
     <h2>⚙️ Tạo bài tập thêm</h2>
     <p class="muted">Chọn tiêu chí rồi bấm « Tạo bài tập ». Ứng dụng sẽ lấy câu hỏi ngẫu nhiên từ ngân hàng hiện có
-    (${BANK.length} câu) — không tạo ra câu hỏi vô hạn.</p>
+    (${BANK.length} câu).</p>
     <div class="grid g2" style="margin-top:.8rem">
       <label>Bài học
         <select id="exLesson"><option value="all">Tất cả (L7–L12)</option>
@@ -2275,7 +2770,7 @@ function renderExtra(){
     if(sk!=="mix") pool = pool.filter(q=>q.skill===sk);
     if(ty!=="any") pool = pool.filter(q=>q.type===ty);
     const n = Number($("#exCount").value);
-    if(!pool.length){ $("#exInfo").textContent = "Không có câu hỏi phù hợp với tiêu chí này. Hãy đổi tiêu chí."; return; }
+    if(!pool.length){ $("#exInfo").textContent = "Không có câu hỏi phù hợp với tiêu chí này."; return; }
     $("#exInfo").textContent = "Đã tạo "+Math.min(n,pool.length)+" câu từ "+pool.length+" câu phù hợp.";
     openQuiz(pick(pool,n),"Bài tập thêm");
   });
@@ -2285,9 +2780,8 @@ function renderExtra(){
 let mistakeFilter = "all";
 function renderMistakes(){
   const all = Object.values(state.mistakes);
-  let list = all.filter(m=>!m.resolved || mistakeFilter==="resolved");
-  if(mistakeFilter==="all") list = all;
-  else if(mistakeFilter==="vocab") list = all.filter(m=>m.skill==="vocab");
+  let list = all;
+  if(mistakeFilter==="vocab") list = all.filter(m=>m.skill==="vocab");
   else if(mistakeFilter==="grammar") list = all.filter(m=>m.skill==="grammar");
   else if(mistakeFilter==="communication") list = all.filter(m=>m.skill==="communication");
   else if(mistakeFilter==="reading") list = all.filter(m=>m.skill==="reading");
@@ -2316,8 +2810,7 @@ function renderMistakes(){
       <tbody>${list.map(m=>{
         const ans = m.options ? m.options[m.answer] : m.answer;
         return `<tr>
-          <td>L${m.lesson}</td>
-          <td>${esc(skillLabel(m.skill))}</td>
+          <td>L${m.lesson}</td><td>${esc(skillLabel(m.skill))}</td>
           <td>${esc(m.topic)}</td>
           <td>${esc(m.q)}</td>
           <td class="muted">${esc(m.yourAnswer)}</td>
@@ -2325,7 +2818,7 @@ function renderMistakes(){
           <td>${m.count}</td>
           <td>${m.resolved?"✅ đã khắc phục":"⏳ cần ôn"}</td>
         </tr>`;}).join("")}</tbody></table></div>`
-      : '<p class="muted">Chưa có lỗi nào trong bộ lọc này. Hãy làm bài tập để ghi nhận lỗi sai.</p>'}
+      : '<p class="muted">Chưa có lỗi nào trong bộ lọc này.</p>'}
   </div>`;
   $("#mkFilter").addEventListener("change",e=>{mistakeFilter=e.target.value;renderMistakes();});
   $("#mkPractice").addEventListener("click",()=>{
@@ -2373,7 +2866,7 @@ function startFinalTest(){
   const read  = pick(BANK.filter(q=>q.skill==="reading"),3);
   const list  = pick(BANK.filter(q=>q.skill==="listening"),2);
   const qs = shuffle([].concat(vocab,gram,comm,read,list)).slice(0,40);
-  finalTest = {active:true, qs:qs, i:0, correct:0, answers:[], endTime:Date.now()+30*60*1000, timer:null};
+  finalTest = {active:true, qs:qs, i:0, correct:0, answers:[], endTime:Date.now()+30*60*1000, timer:null, locked:false};
   renderFinalTest();
   finalTest.timer = setInterval(()=>{
     if(!finalTest||!finalTest.active){clearInterval(finalTest.timer);return;}
@@ -2412,6 +2905,7 @@ function renderFinalTest(){
       <button class="btn sec sm" id="fSubmit">Nộp bài</button>
     </div>
   </div>`;
+  f.locked = false;
   const area = $("#fArea");
   if(q.type==="mcq"){
     q.options.forEach((opt,idx)=>{
@@ -2456,7 +2950,6 @@ function finishFinalTest(timeout){
   const p = pct(f.correct, total);
   state.finalResults.push({date:new Date().toLocaleString("vi-VN"), score:p, correct:f.correct, total:total});
   state.xp += f.correct*10;
-  // ghi nhận lỗi
   f.answers.forEach(a=>recordAnswer(a.q, a.ok, a.user));
   saveState();
   $("#main").innerHTML = `
@@ -2498,6 +2991,7 @@ function renderProgress(){
   const ov = overallStats();
   const known = ALL_VOCAB.filter(x=>(state.vocabStatus[x.lesson+"|"+x.w]||"").indexOf("known")>=0).length;
   const diff = ALL_VOCAB.filter(x=>(state.vocabStatus[x.lesson+"|"+x.w]||"").indexOf("difficult")>=0).length;
+  const fav = ALL_VOCAB.filter(x=>(state.vocabStatus[x.lesson+"|"+x.w]||"").indexOf("fav")>=0).length;
   $("#main").innerHTML = `
   <div class="card">
     <h2>📈 Tiến độ học tập</h2>
@@ -2506,8 +3000,9 @@ function renderProgress(){
       <div class="stat"><div class="n">${state.xp}</div><div class="l">XP</div></div>
       <div class="stat"><div class="n">${state.streak}</div><div class="l">Chuỗi ngày học</div></div>
       <div class="stat"><div class="n">${state.sessions}</div><div class="l">Buổi học</div></div>
-      <div class="stat"><div class="n">${known}/${ALL_VOCAB.length}</div><div class="l">Từ đã đánh dấu « biết »</div></div>
+      <div class="stat"><div class="n">${known}/${ALL_VOCAB.length}</div><div class="l">Từ đánh dấu « biết »</div></div>
       <div class="stat"><div class="n">${diff}</div><div class="l">Từ đánh dấu « khó »</div></div>
+      <div class="stat"><div class="n">${fav}</div><div class="l">Từ yêu thích</div></div>
       <div class="stat"><div class="n">${Object.values(state.mistakes).filter(m=>!m.resolved).length}</div><div class="l">Lỗi chưa khắc phục</div></div>
       <div class="stat"><div class="n">${state.finalResults.length}</div><div class="l">Lần kiểm tra cuối</div></div>
     </div>
@@ -2566,7 +3061,7 @@ function renderSettings(){
           <button class="btn sec" id="setClearMistakes">🗑️ Xóa danh sách lỗi sai</button>
           <button class="btn danger" id="setReset">🗑️ Xóa toàn bộ tiến độ</button>
         </div>
-        <p class="muted" style="margin-top:.6rem">Dữ liệu được lưu trong LocalStorage của trình duyệt bạn đang dùng.</p>
+        <p class="muted" style="margin-top:.6rem">Dữ liệu được lưu trong LocalStorage.</p>
       </div>
     </div>
   </div>
@@ -2574,10 +3069,9 @@ function renderSettings(){
     <h3>ℹ️ Về ứng dụng</h3>
     <p><strong>French Learning Studio — Le Nouveau Taxi ! 1</strong><br>
     Leçons 7–12 | Vocabulaire • Grammaire • Compréhension • Communication</p>
-    <p class="muted">Ứng dụng học tiếng Pháp dành cho sinh viên Việt Nam trình độ A1–A2, lấy cảm hứng từ chủ đề và
-    điểm ngữ pháp của giáo trình <em>Le Nouveau Taxi ! 1</em>. Toàn bộ bài tập, đoạn đọc, hội thoại nghe và bài viết
-    mẫu là <strong>nội dung luyện tập gốc</strong> do ứng dụng tạo ra, không phải bản sao nguyên văn của sách giáo khoa
-    và không phải đề thi chính thức.</p>
+    <p class="muted">Ứng dụng học tiếng Pháp dành cho sinh viên Việt Nam trình độ A1–A2. Toàn bộ bài tập, đoạn đọc,
+    hội thoại nghe và bài viết mẫu là <strong>nội dung luyện tập gốc</strong> do ứng dụng tạo ra, không phải bản sao
+    nguyên văn của sách giáo khoa và không phải đề thi chính thức.</p>
     <h4>Mẹo học tiếng Pháp</h4>
     <ul class="tight">
       <li>Học từ vựng theo cụm (un pantalon bleu) thay vì từ đơn lẻ.</li>
@@ -2585,11 +3079,10 @@ function renderSettings(){
       <li>Luyện nghe 10 phút mỗi ngày hiệu quả hơn 2 giờ mỗi tuần.</li>
       <li>Nói to thành tiếng — đừng chỉ đọc thầm.</li>
       <li>Ôn lại lỗi sai sau mỗi buổi học.</li>
+      <li>Dùng Flashcards mỗi ngày 5 phút để ghi nhớ từ vựng lâu dài.</li>
     </ul>
   </div>`;
-  $("#setDark").addEventListener("change",e=>{
-    state.settings.dark = e.target.checked; applySettings(); saveState();
-  });
+  $("#setDark").addEventListener("change",e=>{state.settings.dark=e.target.checked;applySettings();saveState();});
   $("#setFont").addEventListener("input",e=>{
     state.settings.font = Number(e.target.value);
     $("#fsVal").textContent = state.settings.font+"px";
@@ -2615,6 +3108,8 @@ function resetWithConfirm(){
     state = JSON.parse(JSON.stringify(DEFAULT_STATE));
     applySettings();
     Q = null; finalTest = null;
+    fcState.deck = []; fcState.session = {studied:0,correct:0,wrong:0};
+    stopSpeedRound();
     toast("Đã xóa toàn bộ tiến độ.");
     go("dashboard");
   });
@@ -2641,6 +3136,7 @@ document.addEventListener("DOMContentLoaded",()=>{
   applySettings();
   $$(".navbtn").forEach(b=>b.addEventListener("click",()=>{
     if(Q && (b.dataset.nav!=="practice")) Q = null;
+    if(fcState.speed.active && b.dataset.nav!=="flashcards") stopSpeedRound();
     go(b.dataset.nav);
   }));
   $("#menuBtn").addEventListener("click",()=>$("#sidebar").classList.toggle("open"));
